@@ -1,6 +1,6 @@
 from psat_api import Version
 from psat_api import Region
-from psat_api.Reports import Reports
+from psat_api.reports.Reports import Reports
 from psat_api.web.Resource import Resource
 
 

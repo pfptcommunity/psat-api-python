@@ -3,7 +3,10 @@ from psat_api.reports.Phishing import FilterOptions as PFO
 from psat_api.reports.CyberStrength import FilterOptions as SSFO
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, '<your_api_key_here>')
+    api_key_file = open("psat.api_key", "r")
+    api_key = api_key_file.read()
+    client = Client(Region.US, Version.V1, api_key)
+
     print(client.reports.cyberstrength.uri)
     print(client.reports.phishalarm.uri)
     print(client.reports.phishing.uri)
