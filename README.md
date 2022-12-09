@@ -1,4 +1,4 @@
-# Proofpoint Security Awareness Training Python API Package
+# Proofpoint Security Awareness Training API Package
 
 Library implements all of the functions of the Emerging Threats API via PHP.
 
