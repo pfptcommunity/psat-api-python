@@ -41,3 +41,5 @@ if __name__ == '__main__':
 
 ### Limitations
 There are currently no known limitations. 
+
+For more information please see: https://proofpoint.securityeducation.com/api/reporting/documentation/#api-Introduction-Introduction
