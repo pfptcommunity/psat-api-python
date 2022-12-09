@@ -19,10 +19,10 @@ class Reports(Resource):
         super().__init__(parent, uri)
         self.__phishing = Phishing(self, "phishing")
         self.__cyberstrength = CyberStrength(self, "cyberstrength")
-        self.__phishalarm = CyberStrength(self, "phishalarm")
+        self.__phishalarm = PhishAlarm(self, "phishalarm")
         self.__training = Training(self, "training")
-        self.__users = Training(self, "users")
-        self.__enrollments = Training(self, "trainingenrollments")
+        self.__users = Users(self, "users")
+        self.__enrollments = Enrollments(self, "trainingenrollments")
 
     @property
     def phishing(self):

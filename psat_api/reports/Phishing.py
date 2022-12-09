@@ -6,107 +6,119 @@ from typing import TypeVar
 
 TFilterOptions = TypeVar('TFilterOptions', bound="FilterOptions")
 
+
 class FilterOptions:
+    __PAGE_NUMBER = 'page[number]'
+    __PAGE_SIZE = 'page[size]'
+    __EVENT_START = 'filter[_eventtimestamp_start]'
+    __EVENT_END = 'filter[_eventtimestamp_end]'
+    __CAMPAIGN_NAMES = 'filter[_campaignname]'
+    __CAMPAIGN_START = 'filter[_campaignstartdate_start]'
+    __CAMPAIGN_END = 'filter[_campaignstartdate_end]'
+    __NO_ACTION = 'filter[_includenoaction]'
+    __USER_EMAILS = 'filter[_useremailaddress]'
+    __DELETED_USERS = 'filter[_includedeletedusers]'
+    __INCLUDE_ARCHIVED = 'filter[_includearchivedcampaigns]'
+    __FILTER_USER_TAG = 'filter[user_tag][{}]'
+    __USER_TAG = 'user_tag_enable'
     __options: dict[str]
 
     def __init__(self):
         self.__options = {}
 
+    def clear(self):
+        self.__options.clear()
+
     def set_page_number(self, page_number: int) -> TFilterOptions:
-        self.__options['page[number]'] = page_number
+        self.__options[self.__PAGE_NUMBER] = page_number
         return self
 
     def get_page_number(self) -> int:
-        return self.__options['page[number]']
+        return self.__options[self.__PAGE_NUMBER]
 
     def set_page_size(self, page_size: int) -> TFilterOptions:
-        self.__options['page[size]'] = page_size
+        self.__options[self.__PAGE_SIZE] = page_size
         return self
 
     def get_page_size(self) -> int:
-        return self.__options['page[size]']
+        return self.__options[self.__PAGE_SIZE]
 
     def set_event_start_date(self, start_date: datetime) -> TFilterOptions:
-        self.__options['filter[_eventtimestamp_start]'] = start_date
+        self.__options[self.__EVENT_START] = start_date
         return self
 
     def get_event_start_date(self) -> datetime:
-        return self.__options['filter[_eventtimestamp_start]']
+        return self.__options[self.__EVENT_START]
 
     def set_event_end_date(self, end_date: datetime) -> TFilterOptions:
-        self.__options['filter[_eventtimestamp_end]'] = end_date
+        self.__options[self.__EVENT_END] = end_date
         return self
 
     def get_event_end_date(self) -> datetime:
-        return self.__options['filter[_eventtimestamp_end]']
+        return self.__options[self.__EVENT_END]
 
-    def add_campaign_name(self, name: str) -> TFilterOptions:
-        if self.__options.get('filter[_campaignname]') is None:
-            self.__options['filter[_campaignname]'] = list()
-        self.__options['filter[_campaignname]'].append(name)
+    def set_campaign_names(self, names: List[str]) -> TFilterOptions:
+        self.__options[self.__CAMPAIGN_NAMES] = names
         return self
 
-    def get_campaign_name(self) -> List[str]:
-        return self.__options['filter[_campaignname]']
+    def get_campaign_names(self) -> List[str]:
+        return self.__options[self.__CAMPAIGN_NAMES]
 
     def set_campaign_start_date(self, start_date: datetime) -> TFilterOptions:
-        self.__options['filter[_campaignstartdate_start]'] = start_date
+        self.__options[self.__CAMPAIGN_START] = start_date
         return self
 
     def get_campaign_start_date(self) -> datetime:
-        return self.__options['filter[_campaignstartdate_start]']
+        return self.__options[self.__CAMPAIGN_START]
 
     def set_campaign_end_date(self, end_date: datetime) -> TFilterOptions:
-        self.__options['filter[_campaignstartdate_end]'] = end_date
+        self.__options[self.__CAMPAIGN_END] = end_date
         return self
 
     def get_campaign_end_date(self) -> datetime:
-        return self.__options['filter[_campaignstartdate_end]']
+        return self.__options[self.__CAMPAIGN_END]
 
     def set_include_no_action(self, enable: bool) -> TFilterOptions:
-        self.__options['filter[_includenoaction]'] = enable
+        self.__options[self.__NO_ACTION] = enable
         return self
 
     def get_include_no_action(self) -> bool:
-        return self.__options['filter[_includenoaction]']
+        return self.__options[self.__NO_ACTION]
 
-    def add_user_mail_address(self, email: str) -> TFilterOptions:
-        if self.__options.get('filter[_useremailaddress]') is None:
-            print("Make List")
-            self.__options['filter[_useremailaddress]'] = list()
-        self.__options['filter[_useremailaddress]'].append(email)
+    def set_user_email_addresses(self, emails: List[str]) -> TFilterOptions:
+        self.__options[self.__USER_EMAILS] = emails
         return self
 
-    def get_get_mail_address(self) -> List[str]:
-        return self.__options['filter[_useremailaddress]']
+    def get_get_email_addresses(self) -> List[str]:
+        return self.__options[self.__USER_EMAILS]
 
     def set_include_deleted_users(self, enable: bool) -> TFilterOptions:
-        self.__options['filter[_includedeletedusers]'] = enable
+        self.__options[self.__DELETED_USERS] = enable
         return self
 
     def get_include_deleted_users(self) -> bool:
-        return self.__options['filter[_includedeletedusers]']
+        return self.__options[self.__DELETED_USERS]
 
     def set_include_archived_campaigns(self, enable: bool) -> TFilterOptions:
-        self.__options['filter[_includearchivedcampaigns]'] = enable
+        self.__options[self.__INCLUDE_ARCHIVED] = enable
         return self
 
     def get_include_archived_campaigns(self, enable: bool) -> bool:
-        return self.__options['filter[_includearchivedcampaigns]']
+        return self.__options[self.__INCLUDE_ARCHIVED]
 
-    def set_filter_user_tag(self, tag: str, value: str) -> TFilterOptions:
-        self.__options['filter[user_tag][{}]'.format(tag)] = "'{}'".format(value)
+    def set_user_tags(self, tag: str, value: str) -> TFilterOptions:
+        self.__options[self.__FILTER_USER_TAG.format(tag)] = "'{}'".format(value)
         return self
 
-    def get_filter_user_tag(self, tag: str) -> str:
-        return self.__options['filter[user_tag][{}]'.format(tag)]
+    def get_user_tags(self, tag: str) -> str:
+        return self.__options[self.__FILTER_USER_TAG.format(tag)].lstrip().rstrip()
 
-    def set_user_tag_enabled(self, enabled: bool) -> TFilterOptions:
-        self.__options['user_tag_enable'] = enabled
+    def set_user_tag(self, enabled: bool) -> TFilterOptions:
+        self.__options[self.__USER_TAG] = enabled
         return self
 
-    def get_user_tag_enabled(self):
-        return self.__options['user_tag_enable']
+    def get_user_tag(self):
+        return self.__options[self.__USER_TAG]
 
     def __str__(self) -> str:
         param = ''
@@ -124,7 +136,7 @@ class Phishing(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
 
-    def query(self, options: FilterOptions):
+    def query(self, options: FilterOptions = FilterOptions()):
         new_results = True
         uri = self.uri
         while new_results:

@@ -6,123 +6,135 @@ from typing import TypeVar
 
 TFilterOptions = TypeVar('TFilterOptions', bound="FilterOptions")
 
+
 class FilterOptions:
+    __PAGE_NUMBER = 'page[number]'
+    __PAGE_SIZE = 'page[size]'
+    __ASSIGNMENT_NAMES = 'filter[_assignmentname]'
+    __ASSIGNMENT_START = 'filter[_assignmentstartdate_start]'
+    __ASSIGNMENT_END = 'filter[_assignmentstartdate_end]'
+    __QUESTION_START = 'filter[_questiondate_start]'
+    __QUESTION_END = 'filter[_questiondate_end]'
+    __NOT_STARTED = 'filter[_includenotstarted]'
+    __DELETED_USERS = 'filter[_includedeletedusers]'
+    __DELETED_ASSIGNMENTS = 'filter[_includedeletedassignments]'
+    __FULL_QUESTION = 'filter[_fullquestion]'
+    __ASSIGNMENT_TYPES = 'filter[_assessmenttype]'
+    __USER_EMAILS = 'filter[_useremailaddress]'
+    __FILTER_USER_TAG = 'filter[user_tag][{}]'
+    __USER_TAG = 'user_tag_enable'
     __options: dict[str]
 
     def __init__(self):
         self.__options = {}
 
+    def clear(self):
+        self.__options.clear()
+
     def set_page_number(self, page_number: int) -> TFilterOptions:
-        self.__options['page[number]'] = page_number
+        self.__options[self.__PAGE_NUMBER] = page_number
         return self
 
     def get_page_number(self) -> int:
-        return self.__options['page[number]']
+        return self.__options[self.__PAGE_NUMBER]
 
     def set_page_size(self, page_size: int) -> TFilterOptions:
-        self.__options['page[size]'] = page_size
+        self.__options[self.__PAGE_SIZE] = page_size
         return self
 
     def get_page_size(self) -> int:
-        return self.__options['page[size]']
+        return self.__options[self.__PAGE_SIZE]
 
-    def add_assignment_name(self, name: str) -> TFilterOptions:
-        if self.__options.get('filter[_assignmentname]') is None:
-            self.__options['filter[_assignmentname]'] = list()
-        self.__options['filter[_assignmentname]'].append(name)
+    def set_assignment_names(self, names: List[str]) -> TFilterOptions:
+        self.__options[self.__ASSIGNMENT_NAMES] = names
         return self
 
-    def get_assignment_name(self) -> List[str]:
-        return self.__options['filter[_assignmentname]']
+    def get_assignment_names(self) -> List[str]:
+        return self.__options[self.__ASSIGNMENT_NAMES]
 
     def set_assignment_start_date(self, start_date: datetime) -> TFilterOptions:
-        self.__options['filter[_assignmentstartdate_start]'] = start_date
+        self.__options[self.__ASSIGNMENT_START] = start_date
         return self
 
     def get_assignment_start_date(self) -> datetime:
-        return self.__options['filter[_assignmentstartdate_start]']
+        return self.__options[self.__ASSIGNMENT_START]
 
     def set_assignment_end_date(self, end_date: datetime) -> TFilterOptions:
-        self.__options['filter[_assignmentstartdate_end]'] = end_date
+        self.__options[self.__ASSIGNMENT_END] = end_date
         return self
 
     def get_assignment_end_date(self) -> datetime:
-        return self.__options['filter[_assignmentstartdate_end]']
+        return self.__options[self.__ASSIGNMENT_END]
 
     def set_question_start_date(self, start_date: datetime) -> TFilterOptions:
-        self.__options['filter[_questiondate_start]'] = start_date
+        self.__options[self.__QUESTION_START] = start_date
         return self
 
     def get_question_start_date(self) -> datetime:
-        return self.__options['filter[_questiondate_start]']
+        return self.__options[self.__QUESTION_START]
 
     def set_question_end_date(self, end_date: datetime) -> TFilterOptions:
-        self.__options['filter[_questiondate_end]'] = end_date
+        self.__options[self.__QUESTION_END] = end_date
         return self
 
     def get_question_end_date(self) -> datetime:
-        return self.__options['filter[_questiondate_end]']
+        return self.__options[self.__QUESTION_END]
 
     def set_include_not_started(self, enable: bool) -> TFilterOptions:
-        self.__options['filter[_includenotstarted]'] = enable
+        self.__options[self.__NOT_STARTED] = enable
         return self
 
     def get_include_not_started(self) -> bool:
-        return self.__options['filter[_includenotstarted]']
+        return self.__options[self.__NOT_STARTED]
 
     def set_include_deleted_users(self, enable: bool) -> TFilterOptions:
-        self.__options['filter[_includedeletedusers]'] = enable
+        self.__options[self.__DELETED_USERS] = enable
         return self
 
     def get_include_deleted_users(self) -> bool:
-        return self.__options['filter[_includedeletedusers]']
+        return self.__options[self.__DELETED_USERS]
 
     def set_include_deleted_assignments(self, enable: bool) -> TFilterOptions:
-        self.__options['filter[_includedeletedassignments]'] = enable
+        self.__options[self.__DELETED_ASSIGNMENTS] = enable
         return self
 
     def get_include_deleted_assignments(self, enable: bool) -> bool:
-        return self.__options['filter[_includedeletedassignments]']
+        return self.__options[self.__DELETED_ASSIGNMENTS]
 
     def set_full_question(self, enable: bool) -> TFilterOptions:
-        self.__options['filter[_fullquestion]'] = enable
+        self.__options[self.__FULL_QUESTION] = enable
         return self
 
     def get_full_question(self) -> bool:
-        return self.__options['filter[_fullquestion]']
+        return self.__options[self.__FULL_QUESTION]
 
-    def add_assessment_type(self, name: str) -> TFilterOptions:
-        if self.__options.get('filter[_assessmenttype]') is None:
-            self.__options['filter[_assessmenttype]'] = list()
-        self.__options['filter[_assessmenttype]'].append(name)
+    def set_assessment_types(self, types: List[str]) -> TFilterOptions:
+        self.__options[self.__ASSIGNMENT_TYPES] = types
         return self
 
-    def get_assessment_type(self) -> List[str]:
-        return self.__options['filter[_assessmenttype]']
+    def get_assessment_types(self) -> List[str]:
+        return self.__options[self.__ASSIGNMENT_TYPES]
 
-    def add_user_mail_address(self, email: str) -> TFilterOptions:
-        if self.__options.get('filter[_useremailaddress]') is None:
-            print("Make List")
-            self.__options['filter[_useremailaddress]'] = list()
-        self.__options['filter[_useremailaddress]'].append(email)
+    def set_user_email_addresses(self, emails: List[str]) -> TFilterOptions:
+        self.__options[self.__USER_EMAILS] = emails
         return self
 
-    def get_get_mail_address(self) -> List[str]:
-        return self.__options['filter[_useremailaddress]']
+    def get_user_email_addresses(self) -> List[str]:
+        return self.__options[self.__USER_EMAILS]
 
-    def set_filter_user_tag(self, tag: str, value: str) -> TFilterOptions:
-        self.__options['filter[user_tag][{}]'.format(tag)] = "'{}'".format(value)
+    def set_user_tags(self, tag: str, value: str) -> TFilterOptions:
+        self.__options[self.__FILTER_USER_TAG.format(tag)] = "'{}'".format(value)
         return self
 
-    def get_filter_user_tag(self, tag: str) -> str:
-        return self.__options['filter[user_tag][{}]'.format(tag)]
+    def get_user_tags(self, tag: str) -> str:
+        return self.__options[self.__FILTER_USER_TAG.format(tag)].lstrip().rstrip()
 
-    def set_user_tag_enabled(self, enabled: bool) -> TFilterOptions:
-        self.__options['user_tag_enable'] = enabled
+    def set_user_tag(self, enabled: bool) -> TFilterOptions:
+        self.__options[self.__USER_TAG] = enabled
         return self
 
-    def get_user_tag_enabled(self):
-        return self.__options['user_tag_enable']
+    def get_user_tag(self):
+        return self.__options[self.__USER_TAG]
 
     def __str__(self) -> str:
         param = ''
@@ -140,7 +152,7 @@ class CyberStrength(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
 
-    def query(self, options: FilterOptions):
+    def query(self, options: FilterOptions = FilterOptions()):
         new_results = True
         uri = self.uri
         while new_results:
