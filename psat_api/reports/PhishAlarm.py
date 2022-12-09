@@ -1,8 +1,9 @@
-from psat_api.web.Resource import Resource
-from urllib.parse import urljoin
 from datetime import datetime
 from typing import List
 from typing import TypeVar
+from urllib.parse import urljoin
+
+from psat_api.web.Resource import Resource
 
 TFilterOptions = TypeVar('TFilterOptions', bound="FilterOptions")
 
@@ -127,3 +128,14 @@ class FilterOptions:
 class PhishAlarm(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
+
+    def query(self, options: FilterOptions = FilterOptions()):
+        new_results = True
+        uri = self.uri
+        while new_results:
+            response = self.session.get(uri, params=str(options))
+            results = response.json()
+            yield results['data']
+            if 'next' not in results['links']:
+                break
+            uri = urljoin(uri, results['links']['next'])

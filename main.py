@@ -8,26 +8,30 @@ if __name__ == '__main__':
     ss = CyberStrength.FilterOptions()
     en = Enrollments.FilterOptions()
     ph = Phishing.FilterOptions()
-    # pa = PhishingAlarm.FilterOptions()
+    pa = PhishAlarm.FilterOptions()
     tr = Training.FilterOptions()
     us = Users.FilterOptions()
 
-    #for page in client.reports.cyberstrength.query():
-    #   for entry in page:
-    #        print(entry)
+    for page in client.reports.cyberstrength.query():
+        for entry in page:
+            print(entry)
 
     for page in client.reports.enrollments.query():
         for entry in page:
             print(entry)
 
-    #for page in client.reports.phishing.query():
-    #    for entry in page:
-    #        print(entry)
+    for page in client.reports.phishing.query():
+        for entry in page:
+            print(entry)
 
-    #for page in client.reports.training.query():
-    #    for entry in page:
-    #        print(entry)
+    for page in client.reports.phishalarm.query():
+        for entry in page:
+            print(entry)
 
-    #for page in client.reports.users.query():
-    #    for entry in page:
-    #        print(entry)
+    for page in client.reports.training.query():
+        for entry in page:
+            print(entry)
+
+    for page in client.reports.users.query():
+        for entry in page:
+            print(entry)
