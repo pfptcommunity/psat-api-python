@@ -40,9 +40,6 @@ if __name__ == '__main__':
             print(entry)
 ```
 
-### Coming Soon
-There is currently no setup.py to manage dependencies. This will be implemented soon. 
-
 ### Limitations
 There are currently no known limitations. 
 
