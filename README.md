@@ -5,6 +5,7 @@ Library implements all of the functions of the Emerging Threats API via PHP.
 ### Requirements:
 
 * Python 3.9+
+* requests
 
 ### Getting Started
 The following will dump all data associated with your PSAT instance.
