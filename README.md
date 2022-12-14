@@ -63,7 +63,7 @@ if __name__ == '__main__':
     filter.set_page_size(1000)
     
     # Get the phishing records but apply the filter
-    ph_page = client.reports.phishing.get(ph)
+    ph_page = client.reports.phishing.get(filter)
     
     # This will request all pages of data
     for page_data in ph_page:
