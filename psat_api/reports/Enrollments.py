@@ -1,8 +1,18 @@
+from psat_api.web.CollectionPage import CollectionPage
 from psat_api.web.Resource import Resource
-from urllib.parse import urljoin
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 from typing import TypeVar
+from enum import Enum
+
+
+class EnrollmentStatus(Enum):
+    NOT_STARTED = 'Not Started'
+    IN_PROGRESS = 'In Progress'
+    OVERDUE_IN_PROGRESS = 'Overdue - In Progress'
+    OVERDUE_NOT_STARTED = 'Overdue - Not Started'
+    COMPLETED = 'Completed'
+
 
 TFilterOptions = TypeVar('TFilterOptions', bound="FilterOptions")
 
@@ -73,22 +83,22 @@ class FilterOptions:
     def get_user_email_addresses(self) -> List[str]:
         return self.__options[self.__USER_EMAILS]
 
-    def set_stats(self, stats: List[str]) -> TFilterOptions:
+    def set_stats(self, stats: List[EnrollmentStatus]) -> TFilterOptions:
         self.__options[self.__STATUS] = stats
         return self
 
-    def get_stats(self) -> List[str]:
+    def get_stats(self) -> List[EnrollmentStatus]:
         return self.__options[self.__STATUS]
 
-    def set_first_names(self, stats: List[str]) -> TFilterOptions:
-        self.__options[self.__USER_FIRST_NAMES] = stats
+    def set_first_names(self, first_names: List[str]) -> TFilterOptions:
+        self.__options[self.__USER_FIRST_NAMES] = first_names
         return self
 
     def get_first_names(self) -> List[str]:
         return self.__options[self.__USER_FIRST_NAMES]
 
-    def set_last_names(self, names: List[str]) -> TFilterOptions:
-        self.__options[self.__USER_LAST_NAMES] = names
+    def set_last_names(self, last_names: List[str]) -> TFilterOptions:
+        self.__options[self.__USER_LAST_NAMES] = last_names
         return self
 
     def get_last_names(self) -> List[str]:
@@ -140,7 +150,11 @@ class FilterOptions:
         param = ''
         for k, v in self.__options.items():
             if type(v) == list:
-                param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
+                if len(v):
+                    if all(isinstance(n, str) for n in v):
+                        param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
+                    elif all(isinstance(n, EnrollmentStatus) for n in v):
+                        param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join([s.value for s in v]))
             elif type(v) == datetime:
                 param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, v.date())
             else:
@@ -153,14 +167,7 @@ class Enrollments(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
 
-    def query(self, options: FilterOptions = FilterOptions()):
-        print(options)
-        new_results = True
-        uri = self.uri
-        while new_results:
-            response = self.session.get(uri, params=str(options))
-            results = response.json()
-            yield results['data']
-            if 'next' not in results['links']:
-                break
-            uri = urljoin(uri, results['links']['next'])
+    def get(self, options: FilterOptions = FilterOptions()) -> Optional[CollectionPage]:
+        r = self.session.get(self.uri, params=str(options))
+        r.raise_for_status()
+        return CollectionPage(self.session, r)

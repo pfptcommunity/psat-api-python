@@ -1,8 +1,17 @@
+from psat_api.web.CollectionPage import CollectionPage
 from psat_api.web.Resource import Resource
 from urllib.parse import urljoin
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 from typing import TypeVar
+from enum import Enum
+
+
+class AssignmentStatus(Enum):
+    NOT_STARTED = 'Not Started'
+    IN_PROGRESS = 'In Progress'
+    COMPLETED = 'Completed'
+
 
 TFilterOptions = TypeVar('TFilterOptions', bound="FilterOptions")
 
@@ -136,6 +145,13 @@ class FilterOptions:
         self.__options[self.__FILTER_USER_TAG.format(tag)] = "'{}'".format(value)
         return self
 
+    def set_user_assignment_stats(self, stats: List[AssignmentStatus]) -> TFilterOptions:
+        self.__options[self.__ASSIGNMENT_STATUS] = stats
+        return self
+
+    def get_user_assignment_stats(self) -> List[AssignmentStatus]:
+        return self.__options[self.__ASSIGNMENT_STATUS]
+
     def get_user_tags(self, tag: str) -> str:
         return self.__options[self.__FILTER_USER_TAG.format(tag)].lstrip().rstrip()
 
@@ -157,7 +173,11 @@ class FilterOptions:
         param = ''
         for k, v in self.__options.items():
             if type(v) == list:
-                param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
+                if len(v):
+                    if all(isinstance(n, str) for n in v):
+                        param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
+                    elif all(isinstance(n, AssignmentStatus) for n in v):
+                        param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join([s.value for s in v]))
             elif type(v) == datetime:
                 param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, v.date())
             else:
@@ -169,13 +189,7 @@ class Training(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
 
-    def query(self, options: FilterOptions = FilterOptions()):
-        new_results = True
-        uri = self.uri
-        while new_results:
-            response = self.session.get(uri, params=str(options))
-            results = response.json()
-            yield results['data']
-            if 'next' not in results['links']:
-                break
-            uri = urljoin(uri, results['links']['next'])
+    def get(self, options: FilterOptions = FilterOptions()) -> Optional[CollectionPage]:
+        r = self.session.get(self.uri, params=str(options))
+        r.raise_for_status()
+        return CollectionPage(self.session, r)

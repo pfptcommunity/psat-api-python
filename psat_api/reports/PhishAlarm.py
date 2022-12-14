@@ -1,5 +1,7 @@
+from psat_api.web.CollectionPage import CollectionPage
+from psat_api.web.Resource import Resource
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 from typing import TypeVar
 from urllib.parse import urljoin
 
@@ -117,7 +119,9 @@ class FilterOptions:
         param = ''
         for k, v in self.__options.items():
             if type(v) == list:
-                param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
+                if len(v):
+                    if all(isinstance(n, str) for n in v):
+                        param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
             elif type(v) == datetime:
                 param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, v.date())
             else:
@@ -129,13 +133,7 @@ class PhishAlarm(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
 
-    def query(self, options: FilterOptions = FilterOptions()):
-        new_results = True
-        uri = self.uri
-        while new_results:
-            response = self.session.get(uri, params=str(options))
-            results = response.json()
-            yield results['data']
-            if 'next' not in results['links']:
-                break
-            uri = urljoin(uri, results['links']['next'])
+    def get(self, options: FilterOptions = FilterOptions()) -> Optional[CollectionPage]:
+        r = self.session.get(self.uri, params=str(options))
+        r.raise_for_status()
+        return CollectionPage(self.session, r)
