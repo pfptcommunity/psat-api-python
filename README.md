@@ -1,6 +1,6 @@
 # Proofpoint Security Awareness Training API Package
 
-Library implements all of the functions of the Emerging Threats API via PHP.
+Library implements all of the functions of the PSAT API via Python.
 
 ### Requirements:
 
