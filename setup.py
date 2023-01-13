@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='psat-api-python',
+    name='psat-api',
     version='0.1.0',
     packages=['psat_api', 'psat_api.web', 'psat_api.reports'],
     install_requires=['requests'],
