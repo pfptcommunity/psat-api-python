@@ -6,6 +6,12 @@ Library implements all of the functions of the PSAT API via Python.
 
 * Python 3.9+
 * requests
+ 
+### Installing the Package
+You can install the API library using the following command. 
+```
+pip install git+https://github.com/pfptcommunity/psat-api-python.git#egg=psat-api-python
+```
 
 ### Getting Started
 The following will dump all reports associated with your PSAT instance.
