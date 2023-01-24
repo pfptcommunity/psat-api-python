@@ -199,5 +199,4 @@ class Training(Resource):
 
     def __call__(self, options: FilterOptions = FilterOptions()) -> CollectionPage:
         r = self.session.get(self.uri, params=str(options))
-        r.raise_for_status()
         return CollectionPage(self.session, r)

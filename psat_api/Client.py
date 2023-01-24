@@ -6,6 +6,7 @@ Package: psat_api
 Version: 0.1.1
 License: MIT
 """
+from requests import Response
 from psat_api import Version
 from psat_api import Region
 from psat_api.reports.Reports import Reports
@@ -17,15 +18,33 @@ class Client(Resource):
     __version: Version
     __service: Region
     __reports: Reports
+    __raise_for_status: bool
+    def __session_hook(self, response: Response, **kwargs) -> Response:
+        if response.status_code == 401:
+            response.reason = "Authorization Error, Missing Authorization Header, or Expired Token"
+        elif response.status_code == 402:
+            response.reason = "API Budget Empty"
+        elif response.status_code == 403:
+            response.reason = "User is not authorized to access this resource with an explicit deny"
+        elif response.status_code == 422:
+            response.reason = "Invalid Token, Token Decode Error, Invalid Header"
+        elif response.status_code == 500:
+            response.reason = "Database Error, Internal Server Error"
 
-    def __init__(self, region: Region, version: Version, api_token: str):
+        if self.__raise_for_status:
+            response.raise_for_status()
+
+        return response
+
+    def __init__(self, region: Region, version: Version, api_token: str,  raise_for_status: bool = False):
         super().__init__(None, "https://" + region.value)
         self.__version = version
         self.__service = region
         self.__api_token = api_token
+        self.__raise_for_status = raise_for_status
         self.__reports = Reports(self, "api/reporting/v{}/".format(version.value))
         self.session.headers.update({'x-apikey-token': api_token})
-
+        self.session.hooks = {"response": self.__session_hook}
     @property
     def token(self):
         return self.__api_token

@@ -62,7 +62,18 @@ class CollectionPage:
         return int(self.__response.json().get('meta', {}).get('page_size', 0))
 
     def get_last_page_number(self) -> int:
+        if self.get_page_size() == 0:
+            return 0
         return int((self.get_record_count() + self.get_page_size() - 1) / self.get_page_size())
 
     def get_record_count(self) -> int:
         return int(self.__response.json().get('meta', {}).get('count', 0))
+
+    def get_status(self) -> int:
+        return self.__response.status_code
+
+    def get_reason(self) -> str:
+        return self.__response.reason
+
+    def get_response(self) -> Response:
+        return self.__response
