@@ -3,16 +3,16 @@ This code was tested against Python 3.9
  
 Author: Ludvik Jerabek
 Package: psat_api
-Version: 0.1.0
+Version: 0.1.1
 License: MIT
 """
 from psat_api.web.CollectionPage import CollectionPage
 from psat_api.web.Resource import Resource
-from urllib.parse import urljoin
+
 from datetime import datetime
-from typing import List, Optional
-from typing import TypeVar
 from enum import Enum
+from typing import List
+from typing import TypeVar
 
 
 class AssignmentStatus(Enum):
@@ -197,7 +197,7 @@ class Training(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
 
-    def get(self, options: FilterOptions = FilterOptions()) -> Optional[CollectionPage]:
+    def __call__(self, options: FilterOptions = FilterOptions()) -> CollectionPage:
         r = self.session.get(self.uri, params=str(options))
         r.raise_for_status()
         return CollectionPage(self.session, r)

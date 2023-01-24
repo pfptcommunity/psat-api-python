@@ -5,21 +5,20 @@ if __name__ == '__main__':
     api_key = api_key_file.read()
     client = Client(Region.US, Version.V1, api_key)
 
-    ss_page = client.reports.cyberstrength.get()
-    for data in ss_page:
+    cs_page = client.reports.cyberstrength()
+    for data in cs_page:
         for page_row in data:
             print(page_row)
+        print("Page Size: {}".format(cs_page.get_page_size()))
+        print("Current Page Number: {}".format(cs_page.get_current_page_number()))
+        print("Last Page Number: {}".format(cs_page.get_last_page_number()))
+        print("Total Records: {}".format(cs_page.get_record_count()))
+        print("Link Self: {}".format(cs_page.get_self()))
+        print("Link First: {}".format(cs_page.get_first()))
+        print("Link Last: {}".format(cs_page.get_last()))
+        print("Link Next: {}".format(cs_page.get_next()))
 
-        print("Page Size: {}".format(ss_page.get_page_size()))
-        print("Current Page Number: {}".format(ss_page.get_current_page_number()))
-        print("Last Page Number: {}".format(ss_page.get_last_page_number()))
-        print("Total Records: {}".format(ss_page.get_record_count()))
-        print("Link Self: {}".format(ss_page.get_self()))
-        print("Link First: {}".format(ss_page.get_first()))
-        print("Link Last: {}".format(ss_page.get_last()))
-        print("Link Next: {}".format(ss_page.get_next()))
-
-    en_page = client.reports.enrollments.get()
+    en_page = client.reports.enrollments()
     for data in en_page:
         for page_row in data:
             print(page_row)
@@ -32,7 +31,7 @@ if __name__ == '__main__':
         print("Link Last: {}".format(en_page.get_last()))
         print("Link Next: {}".format(en_page.get_next()))
 
-    ph_page = client.reports.phishing.get()
+    ph_page = client.reports.phishing()
     for data in ph_page:
         for page_row in data:
             print(page_row)
@@ -45,7 +44,7 @@ if __name__ == '__main__':
         print("Link Last: {}".format(ph_page.get_last()))
         print("Link Next: {}".format(ph_page.get_next()))
 
-    pa_page = client.reports.phishalarm.get()
+    pa_page = client.reports.phishalarm()
     for data in pa_page:
         for page_row in data:
             print(page_row)
@@ -58,7 +57,7 @@ if __name__ == '__main__':
         print("Link Last: {}".format(pa_page.get_last()))
         print("Link Next: {}".format(pa_page.get_next()))
 
-    tr_page = client.reports.training.get()
+    tr_page = client.reports.training()
     for data in tr_page:
         for page_row in data:
             print(page_row)
@@ -71,7 +70,7 @@ if __name__ == '__main__':
         print("Link Last: {}".format(tr_page.get_last()))
         print("Link Next: {}".format(tr_page.get_next()))
 
-    us_page = client.reports.users.get()
+    us_page = client.reports.users()
     for data in us_page:
         for page_row in data:
             print(page_row)

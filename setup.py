@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='psat-api',
-    version='0.1.0',
+    version='0.1.1',
     packages=['psat_api', 'psat_api.web', 'psat_api.reports'],
     install_requires=['requests'],
     url='https://github.com/pfptcommunity/psat-api-python',
