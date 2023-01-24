@@ -164,5 +164,5 @@ class CyberStrength(Resource):
         super().__init__(parent, uri)
 
     def __call__(self, options: FilterOptions = FilterOptions()) -> CollectionPage:
-        r = self.session.get(self.uri, params=str(options))
-        return CollectionPage(self.session, r)
+        r = self._session.get(self.uri, params=str(options))
+        return CollectionPage(self._session, r)

@@ -43,8 +43,8 @@ class Client(Resource):
         self.__api_token = api_token
         self.__raise_for_status = raise_for_status
         self.__reports = Reports(self, "api/reporting/v{}/".format(version.value))
-        self.session.headers.update({'x-apikey-token': api_token})
-        self.session.hooks = {"response": self.__session_hook}
+        self._session.headers.update({'x-apikey-token': api_token})
+        self._session.hooks = {"response": self.__session_hook}
     @property
     def token(self):
         return self.__api_token

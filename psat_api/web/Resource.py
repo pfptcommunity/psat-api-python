@@ -29,10 +29,10 @@ class Resource:
     @property
     def uri(self) -> str:
         uri = self.__name
-        parent = self.parent
+        parent = self.__parent
         while parent is not None:
             uri = join(parent.name, uri)
-            parent = parent.parent
+            parent = parent.__parent
         return uri
 
     @property
@@ -40,5 +40,5 @@ class Resource:
         return self.__parent
 
     @property
-    def session(self):
+    def _session(self):
         return self.__session
