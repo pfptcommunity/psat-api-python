@@ -7,10 +7,12 @@ Version: 0.1.1
 License: MIT
 """
 from datetime import datetime
-from typing import List
+from typing import List, Dict
 from typing import TypeVar
 
-from psat_api.web.CollectionPage import CollectionPage
+from requests import PreparedRequest
+
+from psat_api.web.PageIterator import PageIterator
 from psat_api.web.Resource import Resource
 
 TFilterOptions = TypeVar('TFilterOptions', bound="FilterOptions")
@@ -142,11 +144,27 @@ class FilterOptions:
                 param += "{}{}={}".format(('', '&')[len(param) > 0], k, v)
         return param
 
+    @property
+    def params(self) -> Dict:
+        param = {}
+        for k, v in self.__options.items():
+            if type(v) == list:
+                if len(v):
+                    if all(isinstance(n, str) for n in v):
+                        param[k] = "[{}]".format(','.join(v))
+            elif type(v) == datetime:
+                param[k] = "[{}]".format(v.date())
+            else:
+                param[k] = v
+        return param
+
 
 class Phishing(Resource):
     def __init__(self, parent, uri: str):
         super().__init__(parent, uri)
 
-    def __call__(self, options: FilterOptions = FilterOptions()) -> CollectionPage:
-        r = self._session.get(self.uri, params=str(options))
-        return CollectionPage(self._session, r)
+    def __call__(self, options: FilterOptions = FilterOptions()) -> PageIterator:
+        request = PreparedRequest()
+        request.prepare_url(self.uri, options.params)
+        request.method = 'get'
+        return PageIterator(self._session, request)

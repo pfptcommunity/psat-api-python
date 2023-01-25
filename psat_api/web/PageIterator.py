@@ -6,38 +6,37 @@ Package: psat_api
 Version: 0.1.1
 License: MIT
 """
+from typing import List
 from urllib.parse import urljoin
-from requests import Response
+from requests import Response, PreparedRequest
 from requests import Session
 
 
-class CollectionPage:
+class PageIterator:
     __response: Response
     __session: Session
-    __initial: bool
-    __initial_url: str
-
-    def __init__(self, session: Session, response: Response):
+    __first_request: bool
+    __initial_request: PreparedRequest
+    def __init__(self, session: Session, request: PreparedRequest):
         self.__session = session
-        self.__response = response
-        self.__initial = True
-        self.__initial_url = self.get_self()
+        self.__initial_request = request
+        self.__first_request = True
+        self.__response = self.__session.get(self.__initial_request.url)
 
     def __iter__(self):
-        if not self.__initial:
-            self.__initial = True
-            self.__response = self.__session.get(self.__initial_url)
+        if not self.__first_request:
+            self.__first_request = True
+            self.__response = self.__session.get(self.__initial_request.url)
         return self
 
-    def __next__(self):
-        if self.__initial:
-            self.__initial = False
-            return self.__response.json().get('data', {})
+    def __next__(self) -> List:
+        if self.__first_request:
+            self.__first_request = False
         elif self.get_next() is not None:
             self.__response = self.__session.get(self.get_next())
-            return self.__response.json().get('data', {})
         else:
             raise StopIteration
+        return self.__response.json().get('data', [])
 
     def get_self(self) -> str:
         url = self.__response.json().get('links', {}).get('self', None)
@@ -64,6 +63,8 @@ class CollectionPage:
     def get_last_page_number(self) -> int:
         if self.get_page_size() == 0:
             return 0
+        if self.get_record_count() == 0:
+            return 1
         return int((self.get_record_count() + self.get_page_size() - 1) / self.get_page_size())
 
     def get_record_count(self) -> int:
