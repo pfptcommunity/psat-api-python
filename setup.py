@@ -7,7 +7,8 @@ setup(
     install_requires=['requests'],
     url='https://github.com/pfptcommunity/psat-api-python',
     license='MIT',
-    author='Ludvik Jerabek',
+    author='Proofpoint',
     author_email='',
+    maintainer='Ludvik Jerabek',
     description='Proofpoint Security Awareness Training Python API Package'
 )
