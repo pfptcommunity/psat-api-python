@@ -1,14 +1,6 @@
+#!/usr/bin/env python
+
 from setuptools import setup
 
-setup(
-    name='psat-api',
-    version='0.1.1',
-    packages=['psat_api', 'psat_api.web', 'psat_api.reports'],
-    install_requires=['requests'],
-    url='https://github.com/pfptcommunity/psat-api-python',
-    license='MIT',
-    author='Proofpoint',
-    author_email='',
-    maintainer='Ludvik Jerabek',
-    description='Proofpoint Security Awareness Training Python API Package'
-)
+if __name__ == "__main__":
+    setup()
