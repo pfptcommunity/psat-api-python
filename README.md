@@ -21,7 +21,7 @@ from psat_api import *
 if __name__ == '__main__':
     client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
 
-      cs_page = client.reports.cyberstrength()
+    cs_page = client.reports.cyberstrength()
     for data in cs_page:
         print("Page Size: {}".format(cs_page.get_page_size()))
         print("Current Page Number: {}".format(cs_page.get_current_page_number()))
