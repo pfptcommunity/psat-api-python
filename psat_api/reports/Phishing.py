@@ -139,7 +139,7 @@ class FilterOptions:
                     if all(isinstance(n, str) for n in v):
                         param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
             elif type(v) == datetime:
-                param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, v.date())
+                param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, v.strftime('%Y-%m-%dT%H:%M:%S'))
             else:
                 param += "{}{}={}".format(('', '&')[len(param) > 0], k, v)
         return param
@@ -153,7 +153,7 @@ class FilterOptions:
                     if all(isinstance(n, str) for n in v):
                         param[k] = "[{}]".format(','.join(v))
             elif type(v) == datetime:
-                param[k] = "[{}]".format(v.date())
+                param[k] = "[{}]".format(v.strftime('%Y-%m-%dT%H:%M:%S'))
             else:
                 param[k] = v
         return param
