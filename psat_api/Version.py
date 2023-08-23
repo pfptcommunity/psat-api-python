@@ -10,4 +10,6 @@ from enum import Enum, auto
 
 
 class Version(Enum):
-    V1 = '0.1.0'
+    V1 = 'v0.1.0'
+    V2 = 'v0.2.0'
+    V3 = 'v0.3.0'

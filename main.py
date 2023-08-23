@@ -1,9 +1,9 @@
-from psat_api import *
+from psat_api.v1 import *
 
 if __name__ == '__main__':
     api_key_file = open("psat.api_key", "r")
     api_key = api_key_file.read()
-    client = Client(Region.US, Version.V1, api_key)
+    client = Client(Region.US, api_key, True)
 
     cs_page = client.reports.cyberstrength()
     for data in cs_page:
@@ -20,6 +20,7 @@ if __name__ == '__main__':
         for page_row in data:
             print(page_row)
 
+    exit(0)
     en_page = client.reports.enrollments()
     for data in en_page:
         print("Page Size: {}".format(en_page.get_page_size()))
