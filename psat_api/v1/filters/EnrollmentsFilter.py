@@ -7,15 +7,9 @@ License: MIT
 """
 from datetime import datetime
 from typing import List
-from enum import Enum
-from psat_api.web.FilterOptions import FilterOptions, TFilterOptions
 
-class EnrollmentStatus(Enum):
-    NOT_STARTED = 'Not Started'
-    IN_PROGRESS = 'In Progress'
-    OVERDUE_IN_PROGRESS = 'Overdue - In Progress'
-    OVERDUE_NOT_STARTED = 'Overdue - Not Started'
-    COMPLETED = 'Completed'
+from psat_api.common.EnrollmentStatus import EnrollmentStatus
+from psat_api.web.FilterOptions import FilterOptions, TFilterOptions
 
 
 class EnrollmentsFilter(FilterOptions):

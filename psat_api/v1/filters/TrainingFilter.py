@@ -7,13 +7,9 @@ License: MIT
 """
 from datetime import datetime
 from typing import List
-from enum import Enum
-from psat_api.web.FilterOptions import FilterOptions, TFilterOptions
 
-class AssignmentStatus(Enum):
-    NOT_STARTED = 'Not Started'
-    IN_PROGRESS = 'In Progress'
-    COMPLETED = 'Completed'
+from psat_api.common.AssignmentStatus import AssignmentStatus
+from psat_api.web.FilterOptions import FilterOptions, TFilterOptions
 
 
 class TrainingFilter(FilterOptions):

@@ -7,8 +7,8 @@ License: MIT
 """
 from typing import Generic, TypeVar, Type
 
-from psat_api.Region import Region
-from psat_api.Version import Version
+from psat_api.common.Region import Region
+from psat_api.common.Version import Version
 from psat_api.web.ClientBase import ClientBase
 
 TReport = TypeVar("TReport")
