@@ -7,7 +7,7 @@ class ErrorHandler:
     def __init__(self, raise_for_status: bool):
         self.__raise_for_status = raise_for_status
 
-    def handler(self, response: Response, **kwargs) -> Response:
+    def handler(self, response: Response, *args, **kwargs) -> Response:
         if response.status_code == 401:
             response.reason = "Authorization Error, Missing Authorization Header, or Expired Token"
         elif response.status_code == 402:

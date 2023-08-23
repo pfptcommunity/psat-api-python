@@ -3,12 +3,11 @@ This code was tested against Python 3.9
  
 Author: Ludvik Jerabek
 Package: psat_api
-Version: 0.1.1
 License: MIT
 """
 from psat_api.Region import Region
 from psat_api.Version import Version
-from psat_api.v1.reports.Reports import Reports
+from.reports.Reports import Reports
 from psat_api.web.ClientBase import ClientBase
 
 class Client(ClientBase):

@@ -3,17 +3,11 @@ This code was tested against Python 3.9
  
 Author: Ludvik Jerabek
 Package: psat_api
-Version: 0.1.1
 License: MIT
 """
 
 from psat_api.web.Resource import Resource
-from psat_api.v1.reports.Phishing import Phishing
-from psat_api.v1.reports.CyberStrength import CyberStrength
-from psat_api.v1.reports.PhishAlarm import PhishAlarm
-from psat_api.v1.reports.Training import Training
-from psat_api.v1.reports.Users import Users
-from psat_api.v1.reports.Enrollments import Enrollments
+from . import *
 
 
 class Reports(Resource):

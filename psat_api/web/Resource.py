@@ -3,14 +3,14 @@ This code was tested against Python 3.9
  
 Author: Ludvik Jerabek
 Package: psat_api
-Version: 0.1.1
 License: MIT
 """
 from posixpath import join
-from requests import Session
-from typing import TypeVar
+from typing import TypeVar, Union
 
-TResource = TypeVar('TResource', bound="Resource")
+from requests import Session
+
+TResource = TypeVar('TResource', bound=Union['Resource',None])
 
 
 class Resource:
