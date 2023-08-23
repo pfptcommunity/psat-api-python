@@ -11,4 +11,5 @@ from psat_api.Version import Version
 from psat_api.v1.Client import Client
 from .reports import CyberStrength, Enrollments, PhishAlarm, Phishing, Training, Users
 
+
 __all__ = ['Region', 'Version', 'Client', 'CyberStrength', 'Enrollments', 'PhishAlarm', 'Phishing', 'Training', 'Users']

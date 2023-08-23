@@ -9,36 +9,14 @@ License: MIT
 from psat_api.Region import Region
 from psat_api.Version import Version
 from psat_api.v2.reports.Reports import Reports
-from psat_api.web.ErrorHandler import ErrorHandler
-from psat_api.web.Resource import Resource
+from psat_api.web.ClientBase import ClientBase
 
-class Client(Resource):
-    __api_token: str
-    __service: Region
+class Client(ClientBase):
     __reports: Reports
-    __error_handler: ErrorHandler
 
     def __init__(self, region: Region, api_token: str, raise_for_status: bool = False):
-        super().__init__(None, "https://" + region.value)
-        self.__version = Version.V2
-        self.__service = region
-        self.__api_token = api_token
-        self.__error_handler = ErrorHandler(raise_for_status)
-        self.__reports = Reports(self, "api/reports/{}/".format(self.__version.value))
-        self._session.headers.update({'x-apikey-token': api_token})
-        self._session.hooks = {"response": self.__error_handler.handler}
-
-    @property
-    def token(self):
-        return self.__api_token
-
-    @property
-    def service(self):
-        return self.__service.value
-
-    @property
-    def version(self):
-        return self.__version.value
+        super().__init__(region, Version.V2, api_token, raise_for_status)
+        self.__reports = Reports(self, "api/reporting/{}/".format(Version.V2.value))
 
     @property
     def reports(self):

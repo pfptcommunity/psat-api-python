@@ -16,7 +16,7 @@ TResource = TypeVar('TResource', bound="Resource")
 class Resource:
     __parent = TResource
     __name: str
-    __session = Session()
+    __session =  Session()
 
     def __init__(self, parent: TResource, uri: str):
         self.__parent = parent
