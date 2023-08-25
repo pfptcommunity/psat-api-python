@@ -6,15 +6,17 @@ Package: psat-api
 License: MIT
 """
 from datetime import datetime
+from enum import Enum
 from typing import TypeVar, Dict
 
 TFilterOptions = TypeVar('TFilterOptions', bound='FilterOptions')
+
 
 class FilterOptions:
     __PAGE_NUMBER = 'page[number]'
     __PAGE_SIZE = 'page[size]'
     _options: dict[str]
-    
+
     def __init__(self):
         self._options = {}
 
@@ -34,7 +36,7 @@ class FilterOptions:
 
     def get_page_size(self) -> int:
         return self._options[self.__PAGE_SIZE]
-    
+
     def __str__(self) -> str:
         param = ''
         for k, v in self._options.items():
@@ -42,6 +44,8 @@ class FilterOptions:
                 if len(v):
                     if all(isinstance(n, str) for n in v):
                         param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join(v))
+                    elif all(isinstance(n, Enum) for n in v):
+                        param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, ','.join([n.value for n in v]))
             elif type(v) == datetime:
                 param += "{}{}=[{}]".format(('', '&')[len(param) > 0], k, v.strftime('%Y-%m-%dT%H:%M:%S'))
             else:
@@ -56,6 +60,8 @@ class FilterOptions:
                 if len(v):
                     if all(isinstance(n, str) for n in v):
                         param[k] = "[{}]".format(','.join(v))
+                    elif all(isinstance(n, Enum) for n in v):
+                        param[k] = "[{}]".format(','.join([n.value for n in v]))
             elif type(v) == datetime:
                 param[k] = "[{}]".format(v.strftime('%Y-%m-%dT%H:%M:%S'))
             else:

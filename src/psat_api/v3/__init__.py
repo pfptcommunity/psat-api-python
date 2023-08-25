@@ -5,12 +5,14 @@ Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
 """
-from psat_api.common.Region import Region
-from psat_api.common.Version import Version
+from psat_api.common import Region
+from psat_api.common import Version
 from .Client import Client
 from .filters import *
 from .reports import *
+from psat_api.common.EnrollmentStatus import EnrollmentStatus
+from psat_api.common.AssignmentStatus import AssignmentStatus
 
 __all__ = ['Region', 'Version', 'Client', 'CyberStrength', 'Enrollments', 'PhishAlarm', 'Phishing', 'Training', 'Users',
-           'CyberStrengthFilter', 'EnrollmentsFilter', 'PhishAlarmFilter', 'PhishingFilter', 'TrainingFilter',
-           'UsersFilter']
+           'CyberStrengthFilter', 'EnrollmentsFilter', 'PhishAlarmFilter', 'PhishingFilter', 'PhishingExtendedFilter',
+           'TrainingFilter', 'UsersFilter', 'EnrollmentStatus', 'AssignmentStatus']

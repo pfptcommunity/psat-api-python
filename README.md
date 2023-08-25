@@ -13,10 +13,30 @@ You can install the API library using the following command.
 pip install git+https://github.com/pfptcommunity/psat-api-python.git
 ```
 
-### Getting Started
-The following will dump all reports associated with your PSAT instance.
+### PSAT API Versions
+Selecting the version of the PSAT API is done at time of import 
 ```python
-from psat_api import *
+# Version v0.1.0 
+from psat_api.v1 import *
+
+# Version v0.2.0 
+from psat_api.v2 import *
+
+# Version v0.3.0 
+from psat_api.v3 import *
+```
+
+### Creating an API client object
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+```
+
+### Querying CyberStrength Reports 
+```python
+from psat_api.v3 import *
 
 if __name__ == '__main__':
     client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
@@ -35,8 +55,17 @@ if __name__ == '__main__':
         print("Reason: {}".format(cs_page.get_reason()))
         for page_row in data:
             print(page_row)
+```
+
+### Querying Enrollments Reports 
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
 
     en_page = client.reports.enrollments()
+    # ef = EnrollmentsFilter()
     for data in en_page:
         print("Page Size: {}".format(en_page.get_page_size()))
         print("Current Page Number: {}".format(en_page.get_current_page_number()))
@@ -50,7 +79,14 @@ if __name__ == '__main__':
         print("Reason: {}".format(en_page.get_reason()))
         for page_row in data:
             print(page_row)
+```
 
+### Querying Phishing Reports 
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
 
     ph_page = client.reports.phishing()
     for data in ph_page:
@@ -66,6 +102,39 @@ if __name__ == '__main__':
         print("Reason: {}".format(ph_page.get_reason()))
         for page_row in data:
             print(page_row)
+```
+
+### Querying Phishing Extended Reports 
+These phishing exteneded was added in v0.3.0
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+
+    pe_page = client.reports.phishing_extended()
+    for data in pe_page:
+        print("Page Size: {}".format(pe_page.get_page_size()))
+        print("Current Page Number: {}".format(pe_page.get_current_page_number()))
+        print("Last Page Number: {}".format(pe_page.get_last_page_number()))
+        print("Total Records: {}".format(pe_page.get_record_count()))
+        print("Link Self: {}".format(pe_page.get_self()))
+        print("Link First: {}".format(pe_page.get_first()))
+        print("Link Last: {}".format(pe_page.get_last()))
+        print("Link Next: {}".format(pe_page.get_next()))
+        print("Status: {}".format(pe_page.get_status()))
+        print("Reason: {}".format(pe_page.get_reason()))
+        for page_row in data:
+            print(page_row)
+```
+
+### Querying Phish Alarm Reports 
+These phishing exteneded was added in v0.3.0
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
 
     pa_page = client.reports.phishalarm()
     for data in pa_page:
@@ -81,6 +150,15 @@ if __name__ == '__main__':
         print("Reason: {}".format(pa_page.get_reason()))
         for page_row in data:
             print(page_row)
+```
+
+### Querying Training Reports 
+These phishing exteneded was added in v0.3.0
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
 
     tr_page = client.reports.training()
     for data in tr_page:
@@ -96,6 +174,15 @@ if __name__ == '__main__':
         print("Reason: {}".format(tr_page.get_reason()))
         for page_row in data:
             print(page_row)
+```
+
+### Querying User Reports 
+These phishing exteneded was added in v0.3.0
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
 
     us_page = client.reports.users()
     for data in us_page:
@@ -116,13 +203,13 @@ if __name__ == '__main__':
 ### Page Size and Pagination
 
 ```python
-from psat_api import *
+from psat_api.v3 import *
 
 if __name__ == '__main__':
     client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
 
     # Create a filter object
-    filter = Phishing.FilterOptions()
+    filter = PhishingFilter()
     
     # Starting page number
     filter.set_page_number(1)
@@ -148,6 +235,47 @@ if __name__ == '__main__':
         # Print all of the page data
         for row in page_data:
             print(row)
+```
+
+### Filtering Options
+Every report type has it's own set of filters which can be applied. 
+```python
+from psat_api.v3 import *
+
+if __name__ == '__main__':
+    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+
+    # Create a filter object
+    cyberstrength_filter = CyberStrengthFilter()
+    enrollments_filter = EnrollmentsFilter()
+    phishalarm_filter = PhishAlarmFilter()
+    phishing_filter = PhishingFilter()
+    phishingext_filter = PhishingExtendedFilter()
+    training_filter = TrainingFilter()
+    users_filter = UsersFilter()
+    
+    # Get the phishing records and apply the filter
+    cs_page = client.reports.cyberstrength(cyberstrength_filter)
+    en_page = client.reports.enrollments(enrollments_filter)
+    pa_page = client.reports.phishalarm(phishalarm_filter)
+    ph_page = client.reports.phishing(phishing_filter)
+    pe_page = client.reports.phishing_extended(phishingext_filter)
+    tr_page = client.reports.training(training_filter)
+    us_page = client.reports.users(users_filter)
+```
+
+### Custom Filter Types
+Some filter methods such as Training and Enrollments take defined types 
+```python
+from psat_api.v3 import *
+from psat_api.common.AssignmentStatus import AssignmentStatus
+from psat_api.common.EnrollmentStatus import EnrollmentStatus
+
+enrollments_filter = EnrollmentsFilter()
+enrollments_filter.set_stats([EnrollmentStatus.COMPLETED,EnrollmentStatus.IN_PROGRESS])
+
+training_filter = TrainingFilter()
+training_filter.set_user_assignment_stats([AssignmentStatus.COMPLETED,AssignmentStatus.IN_PROGRESS])
 ```
 
 ### Limitations

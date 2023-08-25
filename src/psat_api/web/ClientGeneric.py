@@ -6,8 +6,8 @@ Package: psat-api
 License: MIT
 """
 from typing import Generic, TypeVar, Type
-from psat_api.common.Region import Region
-from psat_api.common.Version import Version
+from psat_api.common import Region
+from psat_api.common import Version
 from .ClientBase import ClientBase
 
 TReport = TypeVar("TReport")

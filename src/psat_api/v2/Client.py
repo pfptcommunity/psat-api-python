@@ -5,8 +5,8 @@ Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
 """
-from psat_api.common.Region import Region
-from psat_api.common.Version import Version
+from psat_api.common import Region
+from psat_api.common import Version
 from psat_api.v2.reports.Reports import Reports
 from psat_api.web import ClientBase
 

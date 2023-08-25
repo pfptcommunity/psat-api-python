@@ -13,4 +13,5 @@ from .PhishingExtendedFilter import PhishingExtendedFilter
 from .TrainingFilter import TrainingFilter
 from .UsersFilter import UsersFilter
 
-__all__ = ['CyberStrengthFilter', 'EnrollmentsFilter', 'PhishAlarmFilter', 'PhishingFilter', 'PhishingExtendedFilter', 'TrainingFilter', 'UsersFilter']
+__all__ = ['CyberStrengthFilter', 'EnrollmentsFilter', 'PhishAlarmFilter', 'PhishingFilter', 'PhishingExtendedFilter',
+           'TrainingFilter', 'UsersFilter']
