@@ -129,7 +129,6 @@ if __name__ == '__main__':
 ```
 
 ### Querying Phish Alarm Reports 
-These phishing exteneded was added in v0.3.0
 ```python
 from psat_api.v3 import *
 
@@ -153,7 +152,6 @@ if __name__ == '__main__':
 ```
 
 ### Querying Training Reports 
-These phishing exteneded was added in v0.3.0
 ```python
 from psat_api.v3 import *
 
@@ -177,7 +175,6 @@ if __name__ == '__main__':
 ```
 
 ### Querying User Reports 
-These phishing exteneded was added in v0.3.0
 ```python
 from psat_api.v3 import *
 
