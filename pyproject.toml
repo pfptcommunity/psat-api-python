@@ -1,3 +1,17 @@
 [build-system]
-requires=['setuptools']
+requires=['setuptools', 'setuptools-scm']
 build-backend="setuptools.build_meta"
+
+[tools.setuptools.packages.find]
+where = ["src"]
+include = ["psat_api"]
+namespaces = true
+
+[project]
+name = "psat-api"
+version = "0.3.0"
+description = "Proofpoint Security Awareness Training Python API Package"
+license = { text = "MIT" }
+dependencies = [
+    'requests'
+]
