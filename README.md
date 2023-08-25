@@ -8,9 +8,14 @@ Library implements all of the functions of the PSAT API via Python.
 * requests
  
 ### Installing the Package
-You can install the API library using the following command. 
+You can install the API library using the following command directly from Github.
 ```
 pip install git+https://github.com/pfptcommunity/psat-api-python.git
+```
+
+or can install the API library using pip.
+```
+pip install psat-api
 ```
 
 ### PSAT API Versions
