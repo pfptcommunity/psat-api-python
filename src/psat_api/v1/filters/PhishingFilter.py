@@ -7,7 +7,9 @@ License: MIT
 """
 from datetime import datetime
 from typing import List
+
 from psat_api.web import FilterOptions, TFilterOptions
+
 
 class PhishingFilter(FilterOptions):
     __EVENT_START = 'filter[_eventtimestamp_start]'

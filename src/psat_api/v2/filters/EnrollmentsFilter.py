@@ -8,6 +8,7 @@ License: MIT
 from psat_api.v1.filters.EnrollmentsFilter import EnrollmentsFilter as EnrollmentsFilterV1
 from psat_api.web import TFilterOptions
 
+
 class EnrollmentsFilter(EnrollmentsFilterV1):
     __DELETED_USERS = 'filter[_includedeletedusers]'
     __REMOVED_ENROLLMENTS = 'filter[_includeremovedenrollments]'

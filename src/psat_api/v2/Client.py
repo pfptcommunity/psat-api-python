@@ -10,6 +10,7 @@ from psat_api.common import Version
 from psat_api.v2.reports.Reports import Reports
 from psat_api.web import ClientBase
 
+
 class Client(ClientBase):
     __reports: Reports
 

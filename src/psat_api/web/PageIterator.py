@@ -7,6 +7,7 @@ License: MIT
 """
 from typing import List
 from urllib.parse import urljoin
+
 from requests import Response, PreparedRequest
 from requests import Session
 
@@ -16,6 +17,7 @@ class PageIterator:
     __session: Session
     __first_request: bool
     __initial_request: PreparedRequest
+
     def __init__(self, session: Session, request: PreparedRequest):
         self.__session = session
         self.__initial_request = request

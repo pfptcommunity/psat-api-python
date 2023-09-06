@@ -6,6 +6,7 @@ Package: psat-api
 License: MIT
 """
 from requests import PreparedRequest
+
 from psat_api.v3.filters.EnrollmentsFilter import EnrollmentsFilter
 from psat_api.web import PageIterator, Resource
 
@@ -20,4 +21,3 @@ class Enrollments(Resource):
         request.prepare_url(self.uri, options.params)
         request.method = 'get'
         return PageIterator(self._session, request)
-

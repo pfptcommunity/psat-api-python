@@ -5,7 +5,9 @@ Author: Ludvik Jerabek
 Package: psat-apiLicense: MIT
 """
 from typing import List
+
 from psat_api.web import FilterOptions, TFilterOptions
+
 
 class UsersFilter(FilterOptions):
     __USER_EMAILS = 'filter[_useremailaddress]'

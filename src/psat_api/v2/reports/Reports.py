@@ -9,6 +9,7 @@ License: MIT
 from psat_api.web import Resource
 from . import *
 
+
 class Reports(Resource):
     __phishing = Phishing
     __cyberstrength = CyberStrength

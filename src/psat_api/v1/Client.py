@@ -7,8 +7,9 @@ License: MIT
 """
 from psat_api.common import Region
 from psat_api.common import Version
-from.reports.Reports import Reports
 from psat_api.web import ClientBase
+from .reports.Reports import Reports
+
 
 class Client(ClientBase):
     __reports: Reports

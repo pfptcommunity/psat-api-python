@@ -6,6 +6,7 @@ Package: psat-api
 License: MIT
 """
 from requests import PreparedRequest
+
 from psat_api.v2.filters.PhishAlarmFilter import PhishAlarmFilter
 from psat_api.web import PageIterator, Resource
 

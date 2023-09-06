@@ -10,13 +10,13 @@ from typing import TypeVar, Union
 
 from requests import Session
 
-TResource = TypeVar('TResource', bound=Union['Resource',None])
+TResource = TypeVar('TResource', bound=Union['Resource', None])
 
 
 class Resource:
     __parent = TResource
     __name: str
-    __session =  Session()
+    __session = Session()
 
     def __init__(self, parent: TResource, uri: str):
         self.__parent = parent

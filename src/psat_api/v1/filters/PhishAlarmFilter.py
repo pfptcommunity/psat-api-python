@@ -7,7 +7,9 @@ License: MIT
 """
 from datetime import datetime
 from typing import List
+
 from psat_api.web import FilterOptions, TFilterOptions
+
 
 class PhishAlarmFilter(FilterOptions):
     __REPORT_START = 'filter[_reporteddate_start]'

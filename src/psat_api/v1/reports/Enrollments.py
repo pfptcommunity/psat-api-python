@@ -10,6 +10,7 @@ from requests import PreparedRequest
 from psat_api.v1.filters.EnrollmentsFilter import EnrollmentsFilter
 from psat_api.web import PageIterator, Resource
 
+
 class Enrollments(Resource):
 
     def __init__(self, parent, uri: str):

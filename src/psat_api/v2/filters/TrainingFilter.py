@@ -6,6 +6,7 @@ Package: psat-api
 License: MIT
 """
 from datetime import datetime
+
 from psat_api.v1.filters.TrainingFilter import TrainingFilter as TrainingFilterV1
 from psat_api.web import TFilterOptions
 

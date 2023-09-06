@@ -6,6 +6,7 @@ Package: psat-api
 License: MIT
 """
 from datetime import datetime
+
 from psat_api.v2.filters.PhishingFilter import PhishingFilter as PhishingFilterV2
 from psat_api.web import TFilterOptions
 
@@ -13,6 +14,7 @@ from psat_api.web import TFilterOptions
 class PhishingFilter(PhishingFilterV2):
     __RECORD_START = 'filter[_dw_record_update_start_dt]'
     __RECORD_END = 'filter[_dw_record_update_end_dt]'
+
     def __init__(self):
         super().__init__()
 

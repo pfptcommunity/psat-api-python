@@ -8,8 +8,8 @@ License: MIT
 from .CyberStrengthFilter import CyberStrengthFilter
 from .EnrollmentsFilter import EnrollmentsFilter
 from .PhishAlarmFilter import PhishAlarmFilter
-from .PhishingFilter import PhishingFilter
 from .PhishingExtendedFilter import PhishingExtendedFilter
+from .PhishingFilter import PhishingFilter
 from .TrainingFilter import TrainingFilter
 from .UsersFilter import UsersFilter
 

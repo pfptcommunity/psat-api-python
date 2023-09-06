@@ -5,6 +5,7 @@ Author: Ludvik Jerabek
 Package: psat-apiLicense: MIT
 """
 from requests import PreparedRequest
+
 from psat_api.v1.filters.UsersFilter import UsersFilter
 from psat_api.web import PageIterator, Resource
 

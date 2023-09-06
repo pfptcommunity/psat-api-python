@@ -144,4 +144,3 @@ class TrainingFilter(FilterOptions):
 
     def get_user_tag(self):
         return self._options[self.__USER_TAG]
-
