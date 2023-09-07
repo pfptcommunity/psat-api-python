@@ -36,7 +36,7 @@ from psat_api.v3 import *
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 ```
 
 ### Querying CyberStrength Reports 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     cs_page = client.reports.cyberstrength()
     for data in cs_page:
@@ -67,7 +67,7 @@ if __name__ == '__main__':
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     en_page = client.reports.enrollments()
     # ef = EnrollmentsFilter()
@@ -91,7 +91,7 @@ if __name__ == '__main__':
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     ph_page = client.reports.phishing()
     for data in ph_page:
@@ -115,7 +115,7 @@ These phishing exteneded was added in v0.3.0
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     pe_page = client.reports.phishing_extended()
     for data in pe_page:
@@ -138,7 +138,7 @@ if __name__ == '__main__':
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     pa_page = client.reports.phishalarm()
     for data in pa_page:
@@ -161,7 +161,7 @@ if __name__ == '__main__':
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     tr_page = client.reports.training()
     for data in tr_page:
@@ -184,7 +184,7 @@ if __name__ == '__main__':
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     us_page = client.reports.users()
     for data in us_page:
@@ -208,7 +208,7 @@ if __name__ == '__main__':
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     # Create a filter object
     filter = PhishingFilter()
@@ -245,7 +245,7 @@ Every report type has it's own set of filters which can be applied.
 from psat_api.v3 import *
 
 if __name__ == '__main__':
-    client = Client(Region.US, Version.V1, "<enter_your_api_key_here>")
+    client = Client(Region.US, "<enter_your_api_key_here>")
 
     # Create a filter object
     cyberstrength_filter = CyberStrengthFilter()
