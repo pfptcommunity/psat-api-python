@@ -17,9 +17,8 @@ TReport = TypeVar("TReport")
 class ClientGeneric(Generic[TReport], ClientBase):
     __reports: TReport
 
-    def __init__(self, cls: Type[TReport], version: Version, region: Region, api_token: str,
-                 raise_for_status: bool = False):
-        super().__init__(region, version, api_token, raise_for_status)
+    def __init__(self, cls: Type[TReport], version: Version, region: Region, api_token: str):
+        super().__init__(region, version, api_token)
         self.__reports = cls(self, "api/reporting/{}/".format(version.value))
 
     @property
