@@ -4,7 +4,7 @@ from requests import Response
 class ErrorHandler:
     __raise_for_status: bool
 
-    def __init__(self, raise_for_status: bool):
+    def __init__(self, raise_for_status: bool = False):
         self.__raise_for_status = raise_for_status
 
     def handler(self, response: Response, *args, **kwargs) -> Response:
@@ -23,3 +23,11 @@ class ErrorHandler:
             response.raise_for_status()
 
         return response
+
+    @property
+    def raise_for_status(self) -> bool:
+        return self.__raise_for_status
+
+    @raise_for_status.setter
+    def raise_for_status(self, raise_for_status: bool):
+        self.__raise_for_status = raise_for_status

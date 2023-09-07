@@ -36,9 +36,5 @@ class Resource:
         return uri
 
     @property
-    def parent(self):
-        return self.__parent
-
-    @property
-    def _session(self):
+    def session(self):
         return self.__session

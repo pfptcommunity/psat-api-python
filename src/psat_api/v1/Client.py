@@ -14,8 +14,8 @@ from .reports.Reports import Reports
 class Client(ClientBase):
     __reports: Reports
 
-    def __init__(self, region: Region, api_token: str, raise_for_status: bool = False):
-        super().__init__(region, Version.V1, api_token, raise_for_status)
+    def __init__(self, region: Region, api_token: str):
+        super().__init__(region, Version.V1, api_token)
         self.__reports = Reports(self, "api/reporting/{}/".format(Version.V1.value))
 
     @property

@@ -4,7 +4,7 @@ from psat_api.common import EnrollmentStatus, AssignmentStatus
 if __name__ == '__main__':
     api_key_file = open("psat.api_key", "r")
     api_key = api_key_file.read()
-    client = Client(Region.US, api_key, True)
+    client = Client(Region.US, api_key)
 
     cyberstrength_filter = CyberStrengthFilter()
     cyberstrength_filter.set_page_size(5)

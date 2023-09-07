@@ -19,4 +19,4 @@ class Training(Resource):
         request = PreparedRequest()
         request.prepare_url(self.uri, options.params)
         request.method = 'get'
-        return PageIterator(self._session, request)
+        return PageIterator(self.session, request)
