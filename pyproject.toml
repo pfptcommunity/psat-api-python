@@ -1,6 +1,6 @@
 [build-system]
-requires=['setuptools', 'setuptools-scm']
-build-backend="setuptools.build_meta"
+requires = ['setuptools', 'setuptools-scm']
+build-backend = "setuptools.build_meta"
 
 [tools.setuptools.packages.find]
 where = ["src"]
@@ -21,5 +21,5 @@ dependencies = [
 [project.urls]
 repository = "https://github.com/pfptcommunity/psat-api-python"
 homepage = "https://proofpoint.securityeducation.com/api/reporting/documentation"
-#documentation = "https://github.com/pfptcommunity/et-api-python"
-#changelog = "https://github.com/pfptcommunity/et-api-python"
+#documentation = "https://github.com/pfptcommunity/psat-api-python"
+#changelog = "https://github.com/pfptcommunity/psat-api-python"

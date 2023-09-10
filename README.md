@@ -6,20 +6,25 @@ Library implements all of the functions of the PSAT API via Python.
 
 * Python 3.9+
 * requests
- 
+
 ### Installing the Package
+
 You can install the API library using the following command directly from Github.
+
 ```
 pip install git+https://github.com/pfptcommunity/psat-api-python.git
 ```
 
 or can install the API library using pip.
+
 ```
 pip install psat-api
 ```
 
 ### PSAT API Versions
-Selecting the version of the PSAT API is done at time of import 
+
+Selecting the version of the PSAT API is done at time of import
+
 ```python
 # Version v0.1.0 
 from psat_api.v1 import *
@@ -32,6 +37,7 @@ from psat_api.v3 import *
 ```
 
 ### Creating an API client object
+
 ```python
 from psat_api.v3 import *
 
@@ -39,7 +45,8 @@ if __name__ == '__main__':
     client = Client(Region.US, "<enter_your_api_key_here>")
 ```
 
-### Querying CyberStrength Reports 
+### Querying CyberStrength Reports
+
 ```python
 from psat_api.v3 import *
 
@@ -62,7 +69,8 @@ if __name__ == '__main__':
             print(page_row)
 ```
 
-### Querying Enrollments Reports 
+### Querying Enrollments Reports
+
 ```python
 from psat_api.v3 import *
 
@@ -86,7 +94,8 @@ if __name__ == '__main__':
             print(page_row)
 ```
 
-### Querying Phishing Reports 
+### Querying Phishing Reports
+
 ```python
 from psat_api.v3 import *
 
@@ -109,8 +118,10 @@ if __name__ == '__main__':
             print(page_row)
 ```
 
-### Querying Phishing Extended Reports 
+### Querying Phishing Extended Reports
+
 These phishing exteneded was added in v0.3.0
+
 ```python
 from psat_api.v3 import *
 
@@ -133,7 +144,8 @@ if __name__ == '__main__':
             print(page_row)
 ```
 
-### Querying Phish Alarm Reports 
+### Querying Phish Alarm Reports
+
 ```python
 from psat_api.v3 import *
 
@@ -156,7 +168,8 @@ if __name__ == '__main__':
             print(page_row)
 ```
 
-### Querying Training Reports 
+### Querying Training Reports
+
 ```python
 from psat_api.v3 import *
 
@@ -179,7 +192,8 @@ if __name__ == '__main__':
             print(page_row)
 ```
 
-### Querying User Reports 
+### Querying User Reports
+
 ```python
 from psat_api.v3 import *
 
@@ -240,7 +254,9 @@ if __name__ == '__main__':
 ```
 
 ### Filtering Options
-Every report type has it's own set of filters which can be applied. 
+
+Every report type has it's own set of filters which can be applied.
+
 ```python
 from psat_api.v3 import *
 
@@ -267,7 +283,9 @@ if __name__ == '__main__':
 ```
 
 ### Custom Filter Types
-Some filter methods such as Training and Enrollments take defined types 
+
+Some filter methods such as Training and Enrollments take defined types
+
 ```python
 from psat_api.v3 import *
 from psat_api.common.AssignmentStatus import AssignmentStatus
@@ -281,6 +299,8 @@ training_filter.set_user_assignment_stats([AssignmentStatus.COMPLETED,Assignment
 ```
 
 ### Limitations
-There are currently no known limitations. 
 
-For more information please see: https://proofpoint.securityeducation.com/api/reporting/documentation/#api-Introduction-Introduction
+There are currently no known limitations.
+
+For more information please
+see: https://proofpoint.securityeducation.com/api/reporting/documentation/#api-Introduction-Introduction

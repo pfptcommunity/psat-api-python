@@ -1,5 +1,5 @@
-from psat_api.v3 import *
 from psat_api.common import EnrollmentStatus, AssignmentStatus
+from psat_api.v3 import *
 
 if __name__ == '__main__':
     api_key_file = open("psat.api_key", "r")
