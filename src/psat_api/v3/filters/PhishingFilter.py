@@ -173,9 +173,9 @@ class PhishingFilter(FilterOptions):
         return self._options[self.__RECORD_END]
 
     @record_end_date.setter
-    def record_end_date(self, end_date: datetime):
-        self._options[self.__RECORD_END] = end_date
+    def record_end_date(self, start_date: datetime):
+        self._options[self.__RECORD_END] = start_date
 
-    def set_record_end_date(self, end_date: datetime) -> TFilterOptions:
-        self.record_start_date = end_date
+    def set_record_end_date(self, start_date: datetime) -> TFilterOptions:
+        self.record_end_date = start_date
         return self
