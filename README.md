@@ -6,6 +6,7 @@ Library implements all of the functions of the PSAT API via Python.
 
 * Python 3.9+
 * requests
+* pysocks
 
 ### Installing the Package
 
@@ -23,15 +24,13 @@ pip install psat-api
 
 ### PSAT API Versions
 
-Selecting the version of the PSAT API is done at time of import
+Selecting the version of the PSAT API is done at time of import.
+
+Proofpoint notified they will be ending support of the v0.1.0 endpoints on September 30, 2023. Support also confirmed
+v0.2.0 was never meant to be a public release. In version 3.1.0 and higher of this library, v0.1.0 and v0.2.0 have been
+removed accordingly.
 
 ```python
-# Version v0.1.0 
-from psat_api.v1 import *
-
-# Version v0.2.0 
-from psat_api.v2 import *
-
 # Version v0.3.0 
 from psat_api.v3 import *
 ```
@@ -226,15 +225,15 @@ if __name__ == '__main__':
 
     # Create a filter object
     filter = PhishingFilter()
-    
+
     # Starting page number
-    filter.set_page_number(1)
+    filter.page_number = 1
     # Number of records per page
-    filter.set_page_size(1000)
-    
+    filter.page_size = 1000
+
     # Get the phishing records but apply the filter
     ph_page = client.reports.phishing(filter)
-    
+
     # This will request all pages of data
     for page_data in ph_page:
         # You can display the page information, this data is updated for every page of data
@@ -271,7 +270,7 @@ if __name__ == '__main__':
     phishingext_filter = PhishingExtendedFilter()
     training_filter = TrainingFilter()
     users_filter = UsersFilter()
-    
+
     # Get the phishing records and apply the filter
     cs_page = client.reports.cyberstrength(cyberstrength_filter)
     en_page = client.reports.enrollments(enrollments_filter)
@@ -292,24 +291,30 @@ from psat_api.common.AssignmentStatus import AssignmentStatus
 from psat_api.common.EnrollmentStatus import EnrollmentStatus
 
 enrollments_filter = EnrollmentsFilter()
-enrollments_filter.set_stats([EnrollmentStatus.COMPLETED,EnrollmentStatus.IN_PROGRESS])
+enrollments_filter.set_stats([EnrollmentStatus.COMPLETED, EnrollmentStatus.IN_PROGRESS])
 
 training_filter = TrainingFilter()
-training_filter.set_user_assignment_stats([AssignmentStatus.COMPLETED,AssignmentStatus.IN_PROGRESS])
+training_filter.set_user_assignment_stats([AssignmentStatus.COMPLETED, AssignmentStatus.IN_PROGRESS])
 ```
 
 ### Proxy Support
+
 Socks5 Proxy Example:
+
 ```python
 from psat_api.v3 import *
+
 if __name__ == '__main__':
     client = Client(Region.US, "<enter_your_api_key_here>")
     credentials = "{}:{}@".format("proxyuser", "proxypass")
     client.session.proxies = {'https': "{}://{}{}:{}".format('socks5', credentials, '<your_proxy>', '8128')}
 ```
+
 HTTP Proxy Example (Squid):
+
 ```python
 from psat_api.v3 import *
+
 if __name__ == '__main__':
     client = Client(Region.US, "<enter_your_api_key_here>")
     credentials = "{}:{}@".format("proxyuser", "proxypass")
@@ -318,8 +323,10 @@ if __name__ == '__main__':
 ```
 
 ### HTTP Timeout Settings
+
 ```python
 from psat_api.v3 import *
+
 if __name__ == '__main__':
     client = Client(Region.US, "<enter_your_api_key_here>")
     # Timeout in seconds, connect timeout

@@ -1,4 +1,3 @@
-from psat_api.common import EnrollmentStatus, AssignmentStatus
 from psat_api.v3 import *
 
 if __name__ == '__main__':
@@ -7,8 +6,8 @@ if __name__ == '__main__':
     client = Client(Region.US, api_key)
 
     cyberstrength_filter = CyberStrengthFilter()
-    cyberstrength_filter.set_page_size(5)
-    cyberstrength_filter.set_page_number(1)
+    cyberstrength_filter.page_size = 5
+    cyberstrength_filter.page_number = 1
     cs_page = client.reports.cyberstrength(cyberstrength_filter)
     for data in cs_page:
         print("Page Size: {}".format(cs_page.get_page_size()))
@@ -28,8 +27,8 @@ if __name__ == '__main__':
 
     enrollments_filter = EnrollmentsFilter()
     enrollments_filter.set_stats([EnrollmentStatus.COMPLETED, EnrollmentStatus.IN_PROGRESS])
-    enrollments_filter.set_page_size(5)
-    enrollments_filter.set_page_number(1)
+    enrollments_filter.page_size = 5
+    enrollments_filter.page_number = 5
     en_page = client.reports.enrollments(enrollments_filter)
     # ef = EnrollmentsFilter()
     for data in en_page:
@@ -49,8 +48,8 @@ if __name__ == '__main__':
         break
 
     phishing_filter = PhishingFilter()
-    phishing_filter.set_page_size(5)
-    phishing_filter.set_page_number(1)
+    phishing_filter.page_size = 5
+    phishing_filter.page_number = 1
     ph_page = client.reports.phishing(phishing_filter)
     for data in ph_page:
         print("Page Size: {}".format(ph_page.get_page_size()))
@@ -69,8 +68,8 @@ if __name__ == '__main__':
         break
 
     phishingext_filter = PhishingExtendedFilter()
-    phishingext_filter.set_page_size(5)
-    phishingext_filter.set_page_number(1)
+    phishingext_filter.page_size = 5
+    phishingext_filter.page_number = 1
     pe_page = client.reports.phishing_extended(phishingext_filter)
     for data in pe_page:
         print("Page Size: {}".format(pe_page.get_page_size()))
@@ -89,8 +88,8 @@ if __name__ == '__main__':
         break
 
     phishalarm_filter = PhishAlarmFilter()
-    phishalarm_filter.set_page_size(5)
-    phishalarm_filter.set_page_number(1)
+    phishalarm_filter.page_size = 5
+    phishalarm_filter.page_number = 1
     pa_page = client.reports.phishalarm(phishalarm_filter)
     for data in pa_page:
         print("Page Size: {}".format(pa_page.get_page_size()))
@@ -109,8 +108,8 @@ if __name__ == '__main__':
         break
 
     training_filter = TrainingFilter()
-    training_filter.set_page_size(5)
-    training_filter.set_page_number(1)
+    training_filter.page_size = 5
+    training_filter.page_number = 1
     training_filter.set_user_assignment_stats([AssignmentStatus.COMPLETED, AssignmentStatus.IN_PROGRESS])
     tr_page = client.reports.training(training_filter)
     for data in tr_page:
@@ -130,8 +129,8 @@ if __name__ == '__main__':
         break
 
     users_filter = UsersFilter()
-    users_filter.set_page_size(5)
-    users_filter.set_page_number(1)
+    users_filter.page_size = 5
+    users_filter.page_number = 1
     us_page = client.reports.users(users_filter)
     for data in us_page:
         print("Page Size: {}".format(us_page.get_page_size()))
