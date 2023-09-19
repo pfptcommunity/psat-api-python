@@ -23,19 +23,29 @@ class FilterOptions:
     def clear(self):
         self._options.clear()
 
-    def set_page_number(self, page_number: int) -> TFilterOptions:
-        self._options[self.__PAGE_NUMBER] = page_number
-        return self
-
-    def get_page_number(self) -> int:
+    @property
+    def page_number(self) -> int:
         return self._options[self.__PAGE_NUMBER]
 
-    def set_page_size(self, page_size: int) -> TFilterOptions:
-        self._options[self.__PAGE_SIZE] = page_size
+    @page_number.setter
+    def page_number(self, page_number: int):
+        self._options[self.__PAGE_NUMBER] = page_number
+
+    def set_page_number(self, page_number: int) -> TFilterOptions:
+        self.page_number = page_number
         return self
 
-    def get_page_size(self) -> int:
+    @property
+    def page_size(self) -> int:
         return self._options[self.__PAGE_SIZE]
+
+    @page_size.setter
+    def page_size(self, page_size: int):
+        self._options[self.__PAGE_SIZE] = page_size
+
+    def set_page_size(self, page_size: int) -> TFilterOptions:
+        self.page_size = page_size
+        return self
 
     def __str__(self) -> str:
         param = ''
