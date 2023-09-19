@@ -28,7 +28,7 @@ if __name__ == '__main__':
     enrollments_filter = EnrollmentsFilter()
     enrollments_filter.set_stats([EnrollmentStatus.COMPLETED, EnrollmentStatus.IN_PROGRESS])
     enrollments_filter.page_size = 5
-    enrollments_filter.page_number = 5
+    enrollments_filter.page_number = 1
     en_page = client.reports.enrollments(enrollments_filter)
     # ef = EnrollmentsFilter()
     for data in en_page:
