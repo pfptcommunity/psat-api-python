@@ -33,7 +33,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def assignment_names(self) -> List[str]:
-        return self._options[self.__ASSIGNMENT_NAMES]
+        return self._options.get(self.__ASSIGNMENT_NAMES)
 
     @assignment_names.setter
     def assignment_names(self, names: List[str]):
@@ -45,7 +45,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def assignment_start_date(self) -> datetime:
-        return self._options[self.__ASSIGNMENT_START]
+        return self._options.get(self.__ASSIGNMENT_START)
 
     @assignment_start_date.setter
     def assignment_start_date(self, start_date: datetime):
@@ -57,7 +57,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def assignment_end_date(self) -> datetime:
-        return self._options[self.__ASSIGNMENT_END]
+        return self._options.get(self.__ASSIGNMENT_END)
 
     @assignment_end_date.setter
     def assignment_end_date(self, end_date: datetime):
@@ -69,7 +69,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def question_start_date(self) -> datetime:
-        return self._options[self.__QUESTION_START]
+        return self._options.get(self.__QUESTION_START)
 
     @question_start_date.setter
     def question_start_date(self, start_date: datetime):
@@ -81,7 +81,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def question_end_date(self) -> datetime:
-        return self._options[self.__QUESTION_END]
+        return self._options.get(self.__QUESTION_END)
 
     @question_end_date.setter
     def question_end_date(self, end_date: datetime):
@@ -93,7 +93,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def include_not_started(self) -> bool:
-        return self._options[self.__NOT_STARTED]
+        return self._options.get(self.__NOT_STARTED)
 
     @include_not_started.setter
     def include_not_started(self, enable: bool):
@@ -105,7 +105,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def include_deleted_users(self) -> bool:
-        return self._options[self.__DELETED_USERS]
+        return self._options.get(self.__DELETED_USERS)
 
     @include_deleted_users.setter
     def include_deleted_users(self, enable: bool):
@@ -117,7 +117,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def include_deleted_assignments(self) -> bool:
-        return self._options[self.__DELETED_ASSIGNMENTS]
+        return self._options.get(self.__DELETED_ASSIGNMENTS)
 
     @include_deleted_assignments.setter
     def include_deleted_assignments(self, enable: bool):
@@ -129,7 +129,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def full_question(self) -> bool:
-        return self._options[self.__FULL_QUESTION]
+        return self._options.get(self.__FULL_QUESTION)
 
     @full_question.setter
     def full_question(self, enable: bool):
@@ -141,7 +141,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def assessment_types(self) -> List[str]:
-        return self._options[self.__ASSIGNMENT_TYPES]
+        return self._options.get(self.__ASSIGNMENT_TYPES)
 
     @assessment_types.setter
     def assessment_types(self, types: List[str]):
@@ -153,7 +153,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def user_email_addresses(self) -> List[str]:
-        return self._options[self.__USER_EMAILS]
+        return self._options.get(self.__USER_EMAILS)
 
     @user_email_addresses.setter
     def user_email_addresses(self, emails: List[str]):
@@ -168,11 +168,11 @@ class CyberStrengthFilter(FilterOptions):
         return self
 
     def get_user_tags(self, tag: str) -> str:
-        return self._options[self.__FILTER_USER_TAG.format(tag)].lstrip().rstrip()
+        return self._options.get(self.__FILTER_USER_TAG.format(tag)).lstrip().rstrip()
 
     @property
     def user_tag(self):
-        return self._options[self.__USER_TAG]
+        return self._options.get(self.__USER_TAG)
 
     @user_tag.setter
     def user_tag(self, enabled: bool):
@@ -184,7 +184,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def record_start_date(self) -> datetime:
-        return self._options[self.__RECORD_START]
+        return self._options.get(self.__RECORD_START)
 
     @record_start_date.setter
     def record_start_date(self, start_date: datetime):
@@ -196,7 +196,7 @@ class CyberStrengthFilter(FilterOptions):
 
     @property
     def record_end_date(self) -> datetime:
-        return self._options[self.__RECORD_END]
+        return self._options.get(self.__RECORD_END)
 
     @record_end_date.setter
     def record_end_date(self, start_date: datetime):

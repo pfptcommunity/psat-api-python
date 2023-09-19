@@ -26,7 +26,7 @@ class UsersFilter(FilterOptions):
     def user_email_addresses(self, emails: List[str]):
         self._options[self.__USER_EMAILS] = emails
 
-    def set_user_email_addresses(self, emails: List[str]) -> TFilterOptions:
+    def user_email_addresses(self, emails: List[str]) -> TFilterOptions:
         self.user_email_addresses = emails
         return self
 

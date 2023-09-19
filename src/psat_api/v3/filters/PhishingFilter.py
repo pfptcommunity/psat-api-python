@@ -31,7 +31,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def event_start_date(self) -> datetime:
-        return self._options[self.__EVENT_START]
+        return self._options.get(self.__EVENT_START)
 
     @event_start_date.setter
     def event_start_date(self, start_date: datetime):
@@ -43,7 +43,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def event_end_date(self) -> datetime:
-        return self._options[self.__EVENT_END]
+        return self._options.get(self.__EVENT_END)
 
     @event_end_date.setter
     def event_end_date(self, end_date: datetime):
@@ -55,7 +55,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def campaign_names(self) -> List[str]:
-        return self._options[self.__CAMPAIGN_NAMES]
+        return self._options.get(self.__CAMPAIGN_NAMES)
 
     @campaign_names.setter
     def campaign_names(self, names: List[str]):
@@ -67,7 +67,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def campaign_start_date(self) -> datetime:
-        return self._options[self.__CAMPAIGN_START]
+        return self._options.get(self.__CAMPAIGN_START)
 
     @campaign_start_date.setter
     def campaign_start_date(self, start_date: datetime):
@@ -79,7 +79,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def campaign_end_date(self) -> datetime:
-        return self._options[self.__CAMPAIGN_END]
+        return self._options.get(self.__CAMPAIGN_END)
 
     @campaign_end_date.setter
     def campaign_end_date(self, end_date: datetime):
@@ -91,7 +91,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def include_no_action(self) -> bool:
-        return self._options[self.__NO_ACTION]
+        return self._options.get(self.__NO_ACTION)
 
     @include_no_action.setter
     def include_no_action(self, enable: bool):
@@ -103,7 +103,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def user_email_addresses(self) -> List[str]:
-        return self._options[self.__USER_EMAILS]
+        return self._options.get(self.__USER_EMAILS)
 
     @user_email_addresses.setter
     def user_email_addresses(self, emails: List[str]):
@@ -115,7 +115,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def include_deleted_users(self) -> bool:
-        return self._options[self.__DELETED_USERS]
+        return self._options.get(self.__DELETED_USERS)
 
     @include_deleted_users.setter
     def include_deleted_users(self, enable: bool):
@@ -127,7 +127,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def include_archived_campaigns(self) -> bool:
-        return self._options[self.__INCLUDE_ARCHIVED]
+        return self._options.get(self.__INCLUDE_ARCHIVED)
 
     @include_archived_campaigns.setter
     def include_archived_campaigns(self, enable: bool):
@@ -142,11 +142,11 @@ class PhishingFilter(FilterOptions):
         return self
 
     def get_user_tags(self, tag: str) -> str:
-        return self._options[self.__FILTER_USER_TAG.format(tag)].lstrip().rstrip()
+        return self._options.get(self.__FILTER_USER_TAG.format(tag)).lstrip().rstrip()
 
     @property
     def user_tag(self):
-        return self._options[self.__USER_TAG]
+        return self._options.get(self.__USER_TAG)
 
     @user_tag.setter
     def user_tag(self, enabled: bool):
@@ -158,7 +158,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def record_start_date(self) -> datetime:
-        return self._options[self.__RECORD_START]
+        return self._options.get(self.__RECORD_START)
 
     @record_start_date.setter
     def record_start_date(self, start_date: datetime):
@@ -170,7 +170,7 @@ class PhishingFilter(FilterOptions):
 
     @property
     def record_end_date(self) -> datetime:
-        return self._options[self.__RECORD_END]
+        return self._options.get(self.__RECORD_END)
 
     @record_end_date.setter
     def record_end_date(self, start_date: datetime):

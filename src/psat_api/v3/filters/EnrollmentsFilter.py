@@ -32,7 +32,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def created_date_start(self) -> datetime:
-        return self._options[self.__CREATED_START]
+        return self._options.get(self.__CREATED_START)
 
     @created_date_start.setter
     def created_date_start(self, start_date: datetime):
@@ -44,7 +44,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def created_date_end(self) -> datetime:
-        return self._options[self.__CREATED_END]
+        return self._options.get(self.__CREATED_END)
 
     @created_date_end.setter
     def created_date_end(self, end_date: datetime):
@@ -56,7 +56,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def assignment_names(self) -> List[str]:
-        return self._options[self.__ASSIGNMENT_NAMES]
+        return self._options.get(self.__ASSIGNMENT_NAMES)
 
     @assignment_names.setter
     def assignment_names(self, names: List[str]):
@@ -68,7 +68,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def user_email_addresses(self) -> List[str]:
-        return self._options[self.__USER_EMAILS]
+        return self._options.get(self.__USER_EMAILS)
 
     @user_email_addresses.setter
     def user_email_addresses(self, emails: List[str]):
@@ -80,7 +80,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def stats(self) -> List[EnrollmentStatus]:
-        return self._options[self.__STATUS]
+        return self._options.get(self.__STATUS)
 
     @stats.setter
     def stats(self, stats: List[EnrollmentStatus]):
@@ -92,7 +92,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def first_names(self) -> List[str]:
-        return self._options[self.__USER_FIRST_NAMES]
+        return self._options.get(self.__USER_FIRST_NAMES)
 
     @first_names.setter
     def first_names(self, first_names: List[str]):
@@ -104,7 +104,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def last_names(self) -> List[str]:
-        return self._options[self.__USER_LAST_NAMES]
+        return self._options.get(self.__USER_LAST_NAMES)
 
     @last_names.setter
     def last_names(self, last_names: List[str]):
@@ -116,7 +116,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def manager_email_addresses(self) -> List[str]:
-        return self._options[self.__MANAGER_EMAILS]
+        return self._options.get(self.__MANAGER_EMAILS)
 
     @manager_email_addresses.setter
     def manager_email_addresses(self, emails: List[str]):
@@ -131,11 +131,11 @@ class EnrollmentsFilter(FilterOptions):
         return self
 
     def get_user_tags(self, tag: str) -> str:
-        return self._options[self.__FILTER_USER_TAG.format(tag)].lstrip().rstrip()
+        return self._options.get(self.__FILTER_USER_TAG.format(tag)).lstrip().rstrip()
 
     @property
     def user_tag(self):
-        return self._options[self.__USER_TAG]
+        return self._options.get(self.__USER_TAG)
 
     @user_tag.setter
     def user_tag(self, enabled: bool):
@@ -147,7 +147,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def include_deleted_users(self) -> bool:
-        return self._options[self.__DELETED_USERS]
+        return self._options.get(self.__DELETED_USERS)
 
     @include_deleted_users.setter
     def include_deleted_users(self, enable: bool):
@@ -159,7 +159,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def include_removed_enrollments(self) -> bool:
-        return self._options[self.__REMOVED_ENROLLMENTS]
+        return self._options.get(self.__REMOVED_ENROLLMENTS)
 
     @include_removed_enrollments.setter
     def include_removed_enrollments(self, enable: bool):
@@ -171,7 +171,7 @@ class EnrollmentsFilter(FilterOptions):
 
     @property
     def enrollment_remove_reason(self) -> str:
-        return self._options[self.__ENROLLMENT_REMOVE_REASON]
+        return self._options.get(self.__ENROLLMENT_REMOVE_REASON)
 
     @enrollment_remove_reason.setter
     def enrollment_remove_reason(self, reason: str):

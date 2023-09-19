@@ -31,7 +31,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def report_date_start(self) -> datetime:
-        return self._options[self.__REPORT_START]
+        return self._options.get(self.__REPORT_START)
 
     @report_date_start.setter
     def report_date_start(self, start_date: datetime):
@@ -43,7 +43,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def report_date_end(self) -> datetime:
-        return self._options[self.__REPORT_END]
+        return self._options.get(self.__REPORT_END)
 
     @report_date_end.setter
     def report_date_end(self, end_date: datetime):
@@ -55,7 +55,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def received_date_start(self) -> datetime:
-        return self._options[self.__RECEIVED_START]
+        return self._options.get(self.__RECEIVED_START)
 
     @received_date_start.setter
     def received_date_start(self, start_date: datetime):
@@ -67,7 +67,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def received_date_end(self) -> datetime:
-        return self._options[self.__RECEIVED_END]
+        return self._options.get(self.__RECEIVED_END)
 
     @received_date_end.setter
     def received_date_end(self, end_date: datetime):
@@ -79,7 +79,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def user_email_addresses(self) -> List[str]:
-        return self._options[self.__USER_EMAILS]
+        return self._options.get(self.__USER_EMAILS)
 
     @user_email_addresses.setter
     def user_email_addresses(self, emails: List[str]):
@@ -91,7 +91,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def include_deleted_users(self) -> bool:
-        return self._options[self.__DELETED_USERS]
+        return self._options.get(self.__DELETED_USERS)
 
     @include_deleted_users.setter
     def include_deleted_users(self, enable: bool):
@@ -103,7 +103,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def actions(self) -> List[str]:
-        return self._options[self.__ACTIONS]
+        return self._options.get(self.__ACTIONS)
 
     @actions.setter
     def actions(self, actions: List[str]):
@@ -118,11 +118,11 @@ class PhishAlarmFilter(FilterOptions):
         return self
 
     def get_user_tags(self, tag: str) -> str:
-        return self._options[self.__FILTER_USER_TAG.format(tag)].lstrip().rstrip()
+        return self._options.get(self.__FILTER_USER_TAG.format(tag)).lstrip().rstrip()
 
     @property
     def user_tag(self):
-        return self._options[self.__USER_TAG]
+        return self._options.get(self.__USER_TAG)
 
     @user_tag.setter
     def user_tag(self, enabled: bool):
@@ -134,7 +134,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def include_platform_notifications(self) -> bool:
-        return self._options[self.__PLATFORM_NOTIFICATIONS]
+        return self._options.get(self.__PLATFORM_NOTIFICATIONS)
 
     @include_platform_notifications.setter
     def include_platform_notifications(self, enable: bool):
@@ -146,7 +146,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def record_start_date(self) -> datetime:
-        return self._options[self.__RECORD_START]
+        return self._options.get(self.__RECORD_START)
 
     @record_start_date.setter
     def record_start_date(self, start_date: datetime):
@@ -158,7 +158,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def record_end_date(self) -> datetime:
-        return self._options[self.__RECORD_END]
+        return self._options.get(self.__RECORD_END)
 
     @record_end_date.setter
     def record_end_date(self, end_date: datetime):
@@ -170,7 +170,7 @@ class PhishAlarmFilter(FilterOptions):
 
     @property
     def include_deleted_campaigns(self):
-        return self._options[self.__INCLUDE_DELETED_CAMPAIGNS]
+        return self._options.get(self.__INCLUDE_DELETED_CAMPAIGNS)
 
     @include_deleted_campaigns.setter
     def include_deleted_campaigns(self, enabled: bool):
