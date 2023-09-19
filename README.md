@@ -298,6 +298,36 @@ training_filter = TrainingFilter()
 training_filter.set_user_assignment_stats([AssignmentStatus.COMPLETED,AssignmentStatus.IN_PROGRESS])
 ```
 
+### Proxy Support
+Socks5 Proxy Example:
+```python
+from psat_api.v3 import *
+if __name__ == '__main__':
+    client = Client(Region.US, "<enter_your_api_key_here>")
+    credentials = "{}:{}@".format("proxyuser", "proxypass")
+    client.session.proxies = {'https': "{}://{}{}:{}".format('socks5', credentials, '<your_proxy>', '8128')}
+```
+HTTP Proxy Example (Squid):
+```python
+from psat_api.v3 import *
+if __name__ == '__main__':
+    client = Client(Region.US, "<enter_your_api_key_here>")
+    credentials = "{}:{}@".format("proxyuser", "proxypass")
+    client.session.proxies = {'https': "{}://{}{}:{}".format('http', credentials, '<your_proxy>', '3128')}
+
+```
+
+### HTTP Timeout Settings
+```python
+from psat_api.v3 import *
+if __name__ == '__main__':
+    client = Client(Region.US, "<enter_your_api_key_here>")
+    # Timeout in seconds, connect timeout
+    client.timeout = 600
+    # Timeout advanced, connect / read timeout
+    client.timeout = (3.05, 27)
+```
+
 ### Limitations
 
 There are currently no known limitations.
