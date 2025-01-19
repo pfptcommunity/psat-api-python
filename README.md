@@ -1,5 +1,5 @@
 # Proofpoint Security Awareness Training API Package
-[![PyPI Downloads](https://static.pepy.tech/badge/psat-api)](https://pepy.tech/projects/psat-api). 
+[![PyPI Downloads](https://static.pepy.tech/badge/psat-api)](https://pepy.tech/projects/psat-api)  
 Library implements all of the functions of the PSAT API via Python.
 
 ### Requirements:
