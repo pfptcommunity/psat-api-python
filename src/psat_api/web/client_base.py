@@ -1,6 +1,4 @@
 """
-This code was tested against Python 3.9
- 
 Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
@@ -9,8 +7,8 @@ from requests.adapters import HTTPAdapter
 
 from psat_api.common import Region
 from psat_api.common import Version
-from .ErrorHandler import ErrorHandler
-from .Resource import Resource
+from .error_handler import ErrorHandler
+from .resource import Resource
 
 
 class TimeoutHTTPAdapter(HTTPAdapter):

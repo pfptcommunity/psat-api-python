@@ -1,16 +1,14 @@
 """
-This code was tested against Python 3.9
-
 Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
 """
-from .CyberStrength import CyberStrength
-from .Enrollments import Enrollments
-from .PhishAlarm import PhishAlarm
-from .Phishing import Phishing
-from .PhishingExtended import PhishingExtended
-from .Training import Training
-from .Users import Users
+from .cyber_strength import CyberStrength
+from .enrollments import Enrollments
+from .phish_alarm import PhishAlarm
+from .phishing import Phishing
+from .phishing_extended import PhishingExtended
+from .training import Training
+from .users import Users
 
 __all__ = ['CyberStrength', 'Enrollments', 'PhishAlarm', 'Phishing', 'PhishingExtended', 'Training', 'Users']

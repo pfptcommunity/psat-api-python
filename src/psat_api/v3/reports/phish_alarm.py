@@ -1,13 +1,11 @@
 """
-This code was tested against Python 3.9
-
 Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
 """
 from requests import PreparedRequest
 
-from psat_api.v3.filters.PhishAlarmFilter import PhishAlarmFilter
+from psat_api.v3.filters.phish_alarm_filter import PhishAlarmFilter
 from psat_api.web import PageIterator, Resource
 
 

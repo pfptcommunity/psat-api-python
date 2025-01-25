@@ -1,6 +1,4 @@
 """
-This code was tested against Python 3.9
-
 Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
@@ -8,7 +6,7 @@ License: MIT
 from datetime import datetime
 from typing import List
 
-from psat_api.common.AssignmentStatus import AssignmentStatus
+from psat_api.common.assignment_status import AssignmentStatus
 from psat_api.web import FilterOptions, TFilterOptions
 
 

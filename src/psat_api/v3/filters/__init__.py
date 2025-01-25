@@ -1,17 +1,15 @@
 """
-This code was tested against Python 3.9
-
 Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
 """
-from .CyberStrengthFilter import CyberStrengthFilter
-from .EnrollmentsFilter import EnrollmentsFilter
-from .PhishAlarmFilter import PhishAlarmFilter
-from .PhishingExtendedFilter import PhishingExtendedFilter
-from .PhishingFilter import PhishingFilter
-from .TrainingFilter import TrainingFilter
-from .UsersFilter import UsersFilter
+from .cyber_strength_filter import CyberStrengthFilter
+from .enrollments_filter import EnrollmentsFilter
+from .phish_alarm_filter import PhishAlarmFilter
+from .phishing_extended_filter import PhishingExtendedFilter
+from .phishing_filter import PhishingFilter
+from .training_filter import TrainingFilter
+from .users_filter import UsersFilter
 
 __all__ = ['CyberStrengthFilter', 'EnrollmentsFilter', 'PhishAlarmFilter', 'PhishingFilter', 'PhishingExtendedFilter',
            'TrainingFilter', 'UsersFilter']

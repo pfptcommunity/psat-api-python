@@ -1,6 +1,4 @@
 """
-This code was tested against Python 3.9
- 
 Author: Ludvik Jerabek
 Package: psat-api
 License: MIT
@@ -9,7 +7,7 @@ from typing import Generic, TypeVar, Type
 
 from psat_api.common import Region
 from psat_api.common import Version
-from .ClientBase import ClientBase
+from .client_base import ClientBase
 
 TReport = TypeVar("TReport")
 
