@@ -13,7 +13,7 @@ jobs:
     name: Build and publish
     runs-on: ubuntu-latest
     environment:
-      name: pypi
+      name: release
       url: https://pypi.org/p/psat-api
     permissions:
       contents: read
