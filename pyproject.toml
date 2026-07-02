@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 version_scheme = "post-release"
 local_scheme = "node-and-date"
-fallback_version = "0.0.1"
+fallback_version = "0.1.0"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -25,7 +25,7 @@ authors = [
 ]
 keywords = ["api", "klarient", "proofpoint", "psat", "rest", "typed"]
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
