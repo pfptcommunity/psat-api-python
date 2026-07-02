@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "node-and-date"
+fallback_version = "0.0.1"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+psat = ["py.typed"]
+
+[project]
+name = "psat-api"
+dynamic = ["version"]
+description = "A typed Python client for the Proofpoint ZenGuide Results API built with Klarient."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "Ludvik Jerabek", email = "83429267+ludvikjerabek@users.noreply.github.com" }
+]
+keywords = ["api", "klarient", "proofpoint", "psat", "rest", "typed"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = [
+    "klarient[requests]>=0.3.0",
+]
+
+[project.urls]
+Documentation = "https://github.com/pfptcommunity/psat-api-python#readme"
+Issues = "https://github.com/pfptcommunity/psat-api-python/issues"
+Repository = "https://github.com/pfptcommunity/psat-api-python"
