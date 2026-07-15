@@ -25,7 +25,7 @@ class PhishAlarmFilter(DatedRecordFilter):
             **common: object,
     ) -> None:
         super().__init__(**common)
-        self._set_defined_fields(
+        self._set_optional_fields(
             report_date_start=report_date_start,
             report_date_end=report_date_end,
             received_date_start=received_date_start,

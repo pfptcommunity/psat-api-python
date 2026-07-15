@@ -28,7 +28,7 @@ class TrainingEnrollmentsFilter(ReportFilter):
             **common: object,
     ) -> None:
         super().__init__(**common)
-        self._set_defined_fields(
+        self._set_optional_fields(
             created_date_start=created_date_start,
             created_date_end=created_date_end,
             assignment_names=assignment_names,

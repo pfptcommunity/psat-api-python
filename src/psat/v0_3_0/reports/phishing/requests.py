@@ -25,7 +25,7 @@ class PhishingFilter(DatedRecordFilter):
             **common: object,
     ) -> None:
         super().__init__(**common)
-        self._set_defined_fields(
+        self._set_optional_fields(
             event_start_date=event_start_date,
             event_end_date=event_end_date,
             campaign_names=campaign_names,

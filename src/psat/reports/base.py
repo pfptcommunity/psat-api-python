@@ -24,7 +24,7 @@ class ReportFilter(QueryRequest):
             user_tag_enable: bool | None = None,
     ) -> None:
         super().__init__(encoder=PSATValueEncoder())
-        self._set_defined_fields(
+        self._set_optional_fields(
             page_number=page_number,
             page_size=page_size,
             user_tag_enable=user_tag_enable,
@@ -93,7 +93,7 @@ class DatedRecordFilter(ReportFilter):
             page_size=page_size,
             user_tag_enable=user_tag_enable,
         )
-        self._set_defined_fields(
+        self._set_optional_fields(
             record_start_date=record_start_date,
             record_end_date=record_end_date,
         )

@@ -17,7 +17,7 @@ class UsersFilter(ReportFilter):
             **common: object,
     ) -> None:
         super().__init__(**common)
-        self._set_defined_fields(
+        self._set_optional_fields(
             user_email_addresses=user_email_addresses,
             include_deleted_users=include_deleted_users,
         )

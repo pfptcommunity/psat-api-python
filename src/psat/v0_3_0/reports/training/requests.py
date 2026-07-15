@@ -31,7 +31,7 @@ class TrainingFilter(DatedRecordFilter):
             **common: object,
     ) -> None:
         super().__init__(**common)
-        self._set_defined_fields(
+        self._set_optional_fields(
             attempt_date_start=attempt_date_start,
             attempt_date_end=attempt_date_end,
             assignment_names=assignment_names,

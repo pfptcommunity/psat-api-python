@@ -27,7 +27,7 @@ class CyberStrengthFilter(DatedRecordFilter):
             **common: object,
     ) -> None:
         super().__init__(**common)
-        self._set_defined_fields(
+        self._set_optional_fields(
             assignment_names=assignment_names,
             assignment_start_date=assignment_start_date,
             assignment_end_date=assignment_end_date,
