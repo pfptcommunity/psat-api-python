@@ -1,3 +1,5 @@
+from collections.abc import Mapping
+
 from psat.reports.models import ReportAttributes, ReportRow
 
 
@@ -23,4 +25,8 @@ class UserAttributes(ReportAttributes):
 class UserRow(ReportRow[UserAttributes]):
     """Typed row from the users report."""
 
-    attributes_model = UserAttributes
+    @property
+    def attributes(self) -> UserAttributes:
+        """Typed users report attributes."""
+        value = self.get("attributes", {})
+        return UserAttributes(value if isinstance(value, Mapping) else {})

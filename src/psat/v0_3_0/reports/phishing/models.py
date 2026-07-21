@@ -1,3 +1,5 @@
+from collections.abc import Mapping
+
 from psat.reports.models import ReportAttributes, ReportRow
 
 
@@ -68,4 +70,8 @@ class PhishingAttributes(ReportAttributes):
 class PhishingRow(ReportRow[PhishingAttributes]):
     """Typed row from the phishing report."""
 
-    attributes_model = PhishingAttributes
+    @property
+    def attributes(self) -> PhishingAttributes:
+        """Typed phishing report attributes."""
+        value = self.get("attributes", {})
+        return PhishingAttributes(value if isinstance(value, Mapping) else {})

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, ClassVar, Generic, TypeVar, cast
+from typing import Any, Generic, TypeVar
 
 AttributesT = TypeVar("AttributesT", bound="ReportAttributes")
 
@@ -79,8 +79,6 @@ class ReportAttributes(dict[str, Any]):
 class ReportRow(dict[str, Any], Generic[AttributesT]):
     """Base data row returned by PSAT report endpoints."""
 
-    attributes_model: ClassVar[type[ReportAttributes]] = ReportAttributes
-
     @property
     def id(self) -> str:
         """Row identifier."""
@@ -91,19 +89,3 @@ class ReportRow(dict[str, Any], Generic[AttributesT]):
     def type(self) -> str:
         """Row type value."""
         return str(self.get("type") or "")
-
-    @property
-    def attributes(self) -> AttributesT:
-        """Typed row attributes."""
-        value = self.get("attributes", {})
-        if not isinstance(value, Mapping):
-            value = {}
-        return cast(AttributesT, self.attributes_model(value))
-
-    @property
-    def email(self) -> str:
-        """Convenience access to the user email address."""
-        value = self.get("useremailaddress")
-        if value is not None:
-            return str(value)
-        return self.attributes.user_email_address

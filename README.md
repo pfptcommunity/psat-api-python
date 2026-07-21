@@ -299,7 +299,6 @@ if __name__ == '__main__':
 
     print(row.id)
     print(row.type)
-    print(row.email)
 
     print(attributes.user_email_address)
     print(attributes.campaign_name)

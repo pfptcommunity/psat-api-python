@@ -1,3 +1,5 @@
+from collections.abc import Mapping
+
 from psat.reports.models import ReportAttributes, ReportRow
 
 
@@ -158,4 +160,8 @@ class CyberStrengthAttributes(ReportAttributes):
 class CyberStrengthRow(ReportRow[CyberStrengthAttributes]):
     """Typed row from the CyberStrength report."""
 
-    attributes_model = CyberStrengthAttributes
+    @property
+    def attributes(self) -> CyberStrengthAttributes:
+        """Typed CyberStrength report attributes."""
+        value = self.get("attributes", {})
+        return CyberStrengthAttributes(value if isinstance(value, Mapping) else {})

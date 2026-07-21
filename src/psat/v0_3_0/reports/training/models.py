@@ -1,3 +1,5 @@
+from collections.abc import Mapping
+
 from psat.reports.models import ReportAttributes, ReportRow
 
 
@@ -128,4 +130,8 @@ class TrainingAttributes(ReportAttributes):
 class TrainingRow(ReportRow[TrainingAttributes]):
     """Typed row from the training report."""
 
-    attributes_model = TrainingAttributes
+    @property
+    def attributes(self) -> TrainingAttributes:
+        """Typed training report attributes."""
+        value = self.get("attributes", {})
+        return TrainingAttributes(value if isinstance(value, Mapping) else {})
