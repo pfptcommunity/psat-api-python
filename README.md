@@ -282,10 +282,10 @@ Report responses are list-like page objects. Each row has a stable wrapper type 
 report fields returned by the API.
 
 ```python
+from klarient import Page
 from psat import Region
 from psat.v0_3_0 import PSATClient
 from psat.v0_3_0.reports import (
-    PhishingExtendedReport,
     PhishingExtendedRow,
     PhishingExtendedAttributes,
 )
@@ -293,7 +293,7 @@ from psat.v0_3_0.reports import (
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    page: PhishingExtendedReport = client.reports.phishing_extended.retrieve()
+    page: Page[PhishingExtendedRow] = client.reports.phishing_extended.retrieve()
     row: PhishingExtendedRow = page[0]
     attributes: PhishingExtendedAttributes = row.attributes
 
