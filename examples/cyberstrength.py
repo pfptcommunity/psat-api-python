@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from common import create_client, load_settings, show_page, show_resource, show_user_tags
+from common import create_client, load_settings
 from psat.v0_3_0.reports import CyberStrengthFilter
 
 
@@ -8,7 +8,9 @@ def main() -> None:
     settings = load_settings()
     client = create_client(settings)
 
-    show_resource("CyberStrength report resource", client.reports.cyberstrength)
+    print("CyberStrength report resource:")
+    print(f"  path: {client.reports.cyberstrength.path}")
+    print(f"  url:  {client.reports.cyberstrength.url}")
 
     cyber_strength = client.reports.cyberstrength.retrieve(
         CyberStrengthFilter()
@@ -16,7 +18,15 @@ def main() -> None:
         .enable_user_tags()
     )
 
-    show_page(cyber_strength)
+    print(f"status={cyber_strength.status}")
+    print(
+        "page="
+        f"{cyber_strength.current_page_number} "
+        f"size={cyber_strength.page_size} "
+        f"total_items={cyber_strength.record_count}"
+    )
+    print(f"links.self={cyber_strength.self_link}")
+    print(f"links.next={cyber_strength.next_link}")
 
     for assessment in cyber_strength:
         attrs = assessment.attributes
@@ -25,7 +35,10 @@ def main() -> None:
         print(f"assessment={attrs.assessment_name}")
         print(f"status={attrs.user_assignment_status}")
         print(f"question={attrs.question_text}")
-        show_user_tags(attrs.user_tags)
+        if attrs.user_tags:
+            print("user_tags:")
+            for name, value in attrs.user_tags.items():
+                print(f"  {name}={value}")
 
 
 if __name__ == "__main__":

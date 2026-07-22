@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from common import create_client, load_settings, show_page, show_resource, show_user_tags
+from common import create_client, load_settings
 from psat.v0_3_0.reports import PhishAlarmFilter
 
 
@@ -8,14 +8,24 @@ def main() -> None:
     settings = load_settings()
     client = create_client(settings)
 
-    show_resource("PhishAlarm report resource", client.reports.phishalarm)
+    print("PhishAlarm report resource:")
+    print(f"  path: {client.reports.phishalarm.path}")
+    print(f"  url:  {client.reports.phishalarm.url}")
 
     reports = client.reports.phishalarm.retrieve(
         PhishAlarmFilter()
         .with_page(1, 5)
         .enable_user_tags()
     )
-    show_page(reports)
+    print(f"status={reports.status}")
+    print(
+        "page="
+        f"{reports.current_page_number} "
+        f"size={reports.page_size} "
+        f"total_items={reports.record_count}"
+    )
+    print(f"links.self={reports.self_link}")
+    print(f"links.next={reports.next_link}")
 
     for report in reports:
         attrs = report.attributes
@@ -24,7 +34,10 @@ def main() -> None:
         print(f"action={attrs.action}")
         print(f"reported={attrs.reported_date}")
         print(f"email_client={attrs.email_client_version}")
-        show_user_tags(attrs.user_tags)
+        if attrs.user_tags:
+            print("user_tags:")
+            for name, value in attrs.user_tags.items():
+                print(f"  {name}={value}")
 
 
 if __name__ == "__main__":
