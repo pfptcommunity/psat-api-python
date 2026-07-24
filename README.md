@@ -60,7 +60,21 @@ examples/
   users.py
 ```
 
-Copy `examples/settings.example.json` to `examples/settings.json` and add your API token to run them locally.
+Copy `examples/settings.example.json` to `settings.json` at the project root and add your API token to run them
+locally. The examples also accept `examples/settings.json` if you prefer to keep local example settings beside the
+example files.
+
+### Live Smoke Testing
+
+Maintainer smoke tests are available under `tools/live_smoke/`. These are separate from the user-facing examples and
+are intended to validate every modeled endpoint against a live tenant before a release.
+
+```bash
+PYTHONPATH=src python3 tools/live_smoke/read_only.py
+```
+
+The smoke test is read-only. It calls each v0.3.0 report endpoint once, prints the modeled resource URL, page metadata,
+pagination links, and the first row shape returned by the API.
 
 ### Resource Paths
 
@@ -84,6 +98,24 @@ if __name__ == '__main__':
     # https://.../api/reporting/v0.3.0/phishing
 ```
 
+### Modeled Report Resources
+
+The v0.3.0 API is modeled under `client.reports`.
+
+```text
+client.reports.cyberstrength
+client.reports.enrollments
+client.reports.phishalarm
+client.reports.phishing
+client.reports.phishing_extended
+client.reports.training
+client.reports.users
+```
+
+Each report action returns `PagedResponse[RowType]`. Use `.page` when you want the first page object, `.data` when you
+want the first page rows, iterate the result when you want page objects, or call `.items()` when you intentionally want
+rows flattened across pages.
+
 ### Querying CyberStrength Reports
 
 ```python
@@ -93,7 +125,7 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    cs_page = client.reports.cyberstrength.retrieve()
+    cs_page = client.reports.cyberstrength.retrieve().page
     print("Page Size: {}".format(cs_page.page_size))
     print("Current Page Number: {}".format(cs_page.current_page_number))
     print("Last Page Number: {}".format(cs_page.last_page_number))
@@ -104,7 +136,7 @@ if __name__ == '__main__':
     print("Link Next: {}".format(cs_page.next_link))
     print("Status: {}".format(cs_page.status))
     print("Reason: {}".format(cs_page.reason))
-    for page_row in cs_page:
+    for page_row in cs_page.data:
         print(page_row.attributes.user_email_address)
         print(page_row.attributes.assignment_name)
         print(page_row.attributes.user_assignment_status)
@@ -119,7 +151,7 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    en_page = client.reports.enrollments.retrieve()
+    en_page = client.reports.enrollments.retrieve().page
     # ef = TrainingEnrollmentsFilter()
     print("Page Size: {}".format(en_page.page_size))
     print("Current Page Number: {}".format(en_page.current_page_number))
@@ -131,7 +163,7 @@ if __name__ == '__main__':
     print("Link Next: {}".format(en_page.next_link))
     print("Status: {}".format(en_page.status))
     print("Reason: {}".format(en_page.reason))
-    for page_row in en_page:
+    for page_row in en_page.data:
         print(page_row.attributes.user_email_address)
         print(page_row.attributes.assignment_name)
         print(page_row.attributes.module_name_user)
@@ -147,7 +179,7 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    ph_page = client.reports.phishing.retrieve()
+    ph_page = client.reports.phishing.retrieve().page
     print("Page Size: {}".format(ph_page.page_size))
     print("Current Page Number: {}".format(ph_page.current_page_number))
     print("Last Page Number: {}".format(ph_page.last_page_number))
@@ -158,7 +190,7 @@ if __name__ == '__main__':
     print("Link Next: {}".format(ph_page.next_link))
     print("Status: {}".format(ph_page.status))
     print("Reason: {}".format(ph_page.reason))
-    for page_row in ph_page:
+    for page_row in ph_page.data:
         print(page_row.attributes.user_email_address)
         print(page_row.attributes.campaign_name)
         print(page_row.attributes.event_type)
@@ -176,7 +208,7 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    pe_page = client.reports.phishing_extended.retrieve()
+    pe_page = client.reports.phishing_extended.retrieve().page
     print("Page Size: {}".format(pe_page.page_size))
     print("Current Page Number: {}".format(pe_page.current_page_number))
     print("Last Page Number: {}".format(pe_page.last_page_number))
@@ -187,7 +219,7 @@ if __name__ == '__main__':
     print("Link Next: {}".format(pe_page.next_link))
     print("Status: {}".format(pe_page.status))
     print("Reason: {}".format(pe_page.reason))
-    for page_row in pe_page:
+    for page_row in pe_page.data:
         print(page_row.attributes.user_email_address)
         print(page_row.attributes.campaign_name)
         print(page_row.attributes.ip_address)
@@ -204,7 +236,7 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    pa_page = client.reports.phishalarm.retrieve()
+    pa_page = client.reports.phishalarm.retrieve().page
     print("Page Size: {}".format(pa_page.page_size))
     print("Current Page Number: {}".format(pa_page.current_page_number))
     print("Last Page Number: {}".format(pa_page.last_page_number))
@@ -215,7 +247,7 @@ if __name__ == '__main__':
     print("Link Next: {}".format(pa_page.next_link))
     print("Status: {}".format(pa_page.status))
     print("Reason: {}".format(pa_page.reason))
-    for page_row in pa_page:
+    for page_row in pa_page.data:
         print(page_row.attributes.user_email_address)
         print(page_row.attributes.campaign_name)
         print(page_row.attributes.action)
@@ -231,7 +263,7 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    tr_page = client.reports.training.retrieve()
+    tr_page = client.reports.training.retrieve().page
     print("Page Size: {}".format(tr_page.page_size))
     print("Current Page Number: {}".format(tr_page.current_page_number))
     print("Last Page Number: {}".format(tr_page.last_page_number))
@@ -242,7 +274,7 @@ if __name__ == '__main__':
     print("Link Next: {}".format(tr_page.next_link))
     print("Status: {}".format(tr_page.status))
     print("Reason: {}".format(tr_page.reason))
-    for page_row in tr_page:
+    for page_row in tr_page.data:
         print(page_row.attributes.user_email_address)
         print(page_row.attributes.assignment_name)
         print(page_row.attributes.module_name_user)
@@ -258,7 +290,7 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    us_page = client.reports.users.retrieve()
+    us_page = client.reports.users.retrieve().page
     print("Page Size: {}".format(us_page.page_size))
     print("Current Page Number: {}".format(us_page.current_page_number))
     print("Last Page Number: {}".format(us_page.last_page_number))
@@ -269,7 +301,7 @@ if __name__ == '__main__':
     print("Link Next: {}".format(us_page.next_link))
     print("Status: {}".format(us_page.status))
     print("Reason: {}".format(us_page.reason))
-    for page_row in us_page:
+    for page_row in us_page.data:
         print(page_row.attributes.user_email_address)
         print(page_row.attributes.user_first_name)
         print(page_row.attributes.user_last_name)
@@ -278,11 +310,11 @@ if __name__ == '__main__':
 
 ### Typed Response Objects
 
-Report responses are list-like page objects. Each row has a stable wrapper type and a nested `attributes` object for the
-report fields returned by the API.
+Report responses are lazy paged responses. The first page is available through `.page`, and each row has a stable wrapper
+type with a nested `attributes` object for the report fields returned by the API.
 
 ```python
-from klarient import Page
+from klarient import Page, PagedResponse
 from psat import Region
 from psat.v0_3_0 import PSATClient
 from psat.v0_3_0.reports import (
@@ -293,7 +325,8 @@ from psat.v0_3_0.reports import (
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    page: Page[PhishingExtendedRow] = client.reports.phishing_extended.retrieve()
+    result: PagedResponse[PhishingExtendedRow] = client.reports.phishing_extended.retrieve()
+    page: Page[PhishingExtendedRow] = result.page
     row: PhishingExtendedRow = page[0]
     attributes: PhishingExtendedAttributes = row.attributes
 
@@ -332,7 +365,7 @@ if __name__ == '__main__':
     filter.with_page(1, 1000)
 
     # Get the phishing records but apply the filter
-    ph_page = client.reports.phishing.retrieve(filter)
+    ph_page = client.reports.phishing.retrieve(filter).page
 
     print("Page Size: {}".format(ph_page.page_size))
     print("Current Page Number: {}".format(ph_page.current_page_number))
@@ -344,13 +377,13 @@ if __name__ == '__main__':
     print("Link Next: {}".format(ph_page.next_link))
     print("Status: {}".format(ph_page.status))
     print("Reason: {}".format(ph_page.reason))
-    for row in ph_page:
+    for row in ph_page.data:
         print(row.attributes.user_email_address)
         print(row.attributes.campaign_name)
 ```
 
-Pageable resources can also walk through pages for you using the default page size. Iterating the resource yields page
-objects. Calling `items()` flattens page boundaries and yields rows.
+Paged responses can also walk through pages for you. Iterating the response yields page objects. Calling `items()`
+flattens page boundaries and yields rows.
 
 ```python
 from psat import Region
@@ -359,12 +392,14 @@ from psat.v0_3_0 import PSATClient
 if __name__ == '__main__':
     client = PSATClient(Region.US, "<enter_your_api_key_here>")
 
-    for page in client.reports.users:
+    users = client.reports.users.retrieve()
+
+    for page in users:
         print("Page: {}".format(page.current_page_number))
         for user in page:
             print(user.attributes.user_email_address)
 
-    for user in client.reports.users.items():
+    for user in client.reports.users.retrieve().items():
         print(user.attributes.user_email_address)
 ```
 
@@ -397,14 +432,17 @@ if __name__ == '__main__':
     training_filter = TrainingFilter()
     users_filter = UsersFilter()
 
-    # Get the report records and apply the filter
-    cs_page = client.reports.cyberstrength.retrieve(cyberstrength_filter)
-    en_page = client.reports.enrollments.retrieve(enrollments_filter)
-    pa_page = client.reports.phishalarm.retrieve(phishalarm_filter)
-    ph_page = client.reports.phishing.retrieve(phishing_filter)
-    pe_page = client.reports.phishing_extended.retrieve(phishingext_filter)
-    tr_page = client.reports.training.retrieve(training_filter)
-    us_page = client.reports.users.retrieve(users_filter)
+    # Get the report records and apply the filter.
+    cs_result = client.reports.cyberstrength.retrieve(cyberstrength_filter)
+    en_result = client.reports.enrollments.retrieve(enrollments_filter)
+    pa_result = client.reports.phishalarm.retrieve(phishalarm_filter)
+    ph_result = client.reports.phishing.retrieve(phishing_filter)
+    pe_result = client.reports.phishing_extended.retrieve(phishingext_filter)
+    tr_result = client.reports.training.retrieve(training_filter)
+    us_result = client.reports.users.retrieve(users_filter)
+
+    print(cs_result.page.status)
+    print(en_result.data)
 ```
 
 ### User Tags
@@ -427,7 +465,7 @@ if __name__ == '__main__':
         .enable_user_tags()
     )
 
-    for user in users:
+    for user in users.data:
         tags = user.attributes.user_tags
         if isinstance(tags, dict):
             print(tags.get("Department"))
@@ -451,7 +489,7 @@ if __name__ == '__main__':
         .with_user_tag("Department", "Security")
     )
 
-    for event in events:
+    for event in events.data:
         print(event.attributes.user_email_address)
         print(event.attributes.user_tags)
 ```

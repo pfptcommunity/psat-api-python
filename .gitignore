@@ -32,4 +32,6 @@ settings.json
 .env
 /docs/
 /tests/
-/tools/
+/tools/*
+!/tools/live_smoke/
+!/tools/live_smoke/*.py
