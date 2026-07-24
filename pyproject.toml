@@ -35,7 +35,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "klarient[requests]>=0.4.0",
+    "klarient[requests]>=0.6.0",
 ]
 
 [project.urls]
