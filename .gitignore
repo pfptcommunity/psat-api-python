@@ -35,3 +35,4 @@ settings.json
 /tools/*
 !/tools/live_smoke/
 !/tools/live_smoke/*.py
+!/tools/live_smoke/README.md

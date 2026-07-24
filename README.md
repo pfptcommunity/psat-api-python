@@ -64,17 +64,12 @@ Copy `examples/settings.example.json` to `settings.json` at the project root and
 locally. The examples also accept `examples/settings.json` if you prefer to keep local example settings beside the
 example files.
 
-### Live Smoke Testing
+### Maintainer Smoke Tests
 
-Maintainer smoke tests are available under `tools/live_smoke/`. These are separate from the user-facing examples and
-are intended to validate every modeled endpoint against a live tenant before a release.
+Release smoke tests live under `tools/live_smoke/`. They are separate from the user-facing examples and require live
+PSAT API credentials.
 
-```bash
-PYTHONPATH=src python3 tools/live_smoke/read_only.py
-```
-
-The smoke test is read-only. It calls each v0.3.0 report endpoint once, prints the modeled resource URL, page metadata,
-pagination links, and the first row shape returned by the API.
+See `tools/live_smoke/README.md`.
 
 ### Resource Paths
 
